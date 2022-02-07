@@ -69,40 +69,22 @@ async function automateThankYous(){
    
        const donationInfo = await collectDonationInfo(newDonations);
    
-       //console.log(donationInfo)    
+
        //5. scan for 'in honor of' donations. For every one of that type create a new object for the honoree because they will need to receive their own email. Then add that object to the donor obj array
    
        const donationsWithHonorees =  await generateHonoreeObj(donationInfo);
    
        // console.log(donationsWithHonorees[2], donationsWithHonorees[1] )
-       //6. Add template HTML filename to each donation object so that nodemailer will know which template to use when the donations are passed to it
-   
-       const donationInfoWithTempPath = await labelDonations(donationsWithHonorees);
 
+       //6. Add template HTML filename to each donation object so that nodemailer will know which template to use when the donations are passed to it
+
+                // here we also check if a donation is from a monthly donation plan which requires its own unique template
+   
+       const donationInfoWithTempPath = await labelDonations(donationsWithHonorees, currentTime);
 
        //7. assess each donation for any custom language to be added to the template email based on the criteria of the donation. This copy language is sourced from the template Google Doc 
        
-
        
-    //    let stillSend = []
-
-
-    //    for(let i = 0 ; i < donationInfoWithTempPath.length ; i++){
-    //        if(i!==5){
-    //         //    console.log(i)
-    //         stillSend.push(donationInfoWithTempPath[i])
-    //        }
-    //    }
-
-
-    //     stillSend.forEach(( donation, index) => {
-    //        console.log(index)
-    //        console.log(donation)
-    //    })
-
-
-       
-    // console.log(stillSend)
 
        const donationsInfoWithTemplateLanguage = await addCustomLanguage(donationInfoWithTempPath) //donationInfoWithTempPath
    
@@ -119,7 +101,7 @@ async function automateThankYous(){
     
 
    
-     const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage)
+    //  const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage)
 
 
   

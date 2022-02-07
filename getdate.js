@@ -12,9 +12,13 @@ async function getDateandTime(){
 
        const yesterday = new Date(yesterdayMilliseconds - tzoffset); //converts to 
 
-       const currentTime = new Date();
+       const currentTimeGMT = new Date();
 
-       return [currentTime, yesterday]
+       const offset = -300
+
+       const currentTimeEST = new Date(currentTimeGMT.getTime() + offset*60*1000)
+      
+       return [currentTimeEST, yesterday]
     }
     
     // console.log(currentTimeAndYesterdaysDate)

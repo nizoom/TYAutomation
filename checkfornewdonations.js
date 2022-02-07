@@ -7,9 +7,7 @@ async function checkForNewDonations(donations, currentTime){
 
     //get previous time 
 
-    const previousTime = moment(currentTime).subtract(30, 'minutes').toDate(); // this defines the window in which a donation is considered 'new'
-
-    console.log(currentTime)
+    const previousTime = moment(currentTime).subtract(10, 'days').toDate(); // this defines the window in which a donation is considered 'new'
     
     let newDonations = []
     //if donation time is later than previous time / previous check then it is a new donation and will need an email

@@ -47,7 +47,8 @@ async function collectDonationInfo(donations){
                 lastName : donation.donor.last_name,
                 TYToEmailAddress: donation.donor.email,
                 donationAmount : donationStr,
-                donationDate : donation.donation_date
+                donationDate : donation.donation_date,
+                donorID : donation.donor.id
 
             }
 
