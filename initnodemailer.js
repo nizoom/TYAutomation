@@ -9,11 +9,20 @@ async function initNodeMailer(donations) {
     // console.log('we made it to here ' + donations)
 
     const mailResults = await Promise.all(donations.map(async donation => {
-
-       const emailStatus = await createNewEmail(donation)
-
-       return emailStatus
         
+        //set timeout to avoid error with too many node mailer calls back to back 
+
+       const index = donations.indexOf(donation);
+
+       setTimeout( async () => {
+
+            const emailStatus = await createNewEmail(donation)
+
+            return emailStatus
+        
+
+       }, 500 * index)  
+
     }))
 
     //store results 

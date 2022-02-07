@@ -26,11 +26,11 @@ automateThankYous()
 
 // setInterval sets up every subsequent running
 
-// setInterval(function(){
+setInterval(function(){
 
-//     automateThankYous()
+    automateThankYous()
 
-// },1800000);
+},1800000); // 30 minutes
 
 
 async function automateThankYous(){
@@ -39,29 +39,29 @@ async function automateThankYous(){
    
        //1. get current date 
 
-       const [todaysDate, currentTime] = await getDateandTime();
+       const [currentTime, yesterday] = await getDateandTime();
 
 
        //2. query donorbox for todays donations
    
-       const todaysDonations = await initDonationSearch('2021-12-29'); //today YYYY-MM-DD 2021-15-12
+       const todaysDonations = await initDonationSearch(yesterday); //today YYYY-MM-DD 2021-15-12
    
-     
+
     
        //3. if any donations occured in the last 10 minutes (AKA since last check) then they are new 
    
        const newDonations = await checkForNewDonations(todaysDonations, currentTime);
-   
-      
+
+
+
        //3.5. if there are no new donations, then end the program 
+
    
        if(newDonations < 1){
+
+           console.log('no donations since last check')
    
-           console.log('no new donations since 10 minutes ago')
-   
-           const ending = 'no new donations since 10 minutes ago'
-   
-           return ending;
+           return;
    
        }
    
@@ -80,37 +80,49 @@ async function automateThankYous(){
        const donationInfoWithTempPath = await labelDonations(donationsWithHonorees);
 
 
-       
-       // get a visual 
-
-       donationInfoWithTempPath.forEach(( donation, index) => {
-           console.log(index)
-           console.log(donation)
-       })
-
        //7. assess each donation for any custom language to be added to the template email based on the criteria of the donation. This copy language is sourced from the template Google Doc 
        
 
        
-       let stillSend = []
+    //    let stillSend = []
 
 
-       for(let i = 0 ; i < donationInfoWithTempPath.length ; i++){
-           if(i!==2 && i!==8 && i!==9 && i!==11){
-               console.log(i)
-            stillSend.push(donationInfoWithTempPath[i])
-           }
-       }
+    //    for(let i = 0 ; i < donationInfoWithTempPath.length ; i++){
+    //        if(i!==5){
+    //         //    console.log(i)
+    //         stillSend.push(donationInfoWithTempPath[i])
+    //        }
+    //    }
+
+
+    //     stillSend.forEach(( donation, index) => {
+    //        console.log(index)
+    //        console.log(donation)
+    //    })
+
+
        
     // console.log(stillSend)
 
-       const donationsInfoWithTemplateLanguage = await addCustomLanguage(stillSend) //donationInfoWithTempPath
+       const donationsInfoWithTemplateLanguage = await addCustomLanguage(donationInfoWithTempPath) //donationInfoWithTempPath
    
+
+         // get a visual 
+
+         donationsInfoWithTemplateLanguage.forEach(( donation, index) => {
+            console.log(index)
+            console.log(donation)
+        })
        
-       //8. pass array of donaitonInfo objects to nodemailer file for sending 
+    //    8. pass array of donaitonInfo objects to nodemailer file for sending 
+
+    
+
    
-       const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage)
+     const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage)
 
 
+  
 }
- 
+
+

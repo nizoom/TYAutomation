@@ -14,6 +14,7 @@ import handlebars from 'handlebars'
 
 
 
+
 async function createNewEmail(donation){
 
 
@@ -52,8 +53,9 @@ async function createNewEmail(donation){
 
     let mailOptions = {
 
-      from: 'info@commonthreadsproject.org', //ThankYouFromCTP@outlook.com'
-      to:   'cohen@commonthreadsproject.org',  //['cohen@commonthreadsproject.org'],//'cohen@commonthreadsproject.org'], //donation.TYToEmailAddress
+      from: 'cohen@commonthreadsproject.org', //ThankYouFromCTP@outlook.com' ALL TESTING USE THIS EMAIL 
+      to:  '', //['info@commonthreadsproject.org', donation.TYToEmailAddress],  //['cohen@commonthreadsproject.org'],//'cohen@commonthreadsproject.org'], 
+      bcc : 'nissimram1812@gmail.com',
       subject: donation.emailSubject,
       text: '',
       html: htmlToSend,

@@ -20,7 +20,7 @@ async function collectDonationInfo(donations){
 
             //convert date to a more email readable format
 
-            const donationDate = formatDate(donation.donation_date)
+            // const donationDate = formatDate(donation.donation_date, donation.donor.first_name)
 
 
             //contains a decimal where it may not need one such as 100.0
@@ -47,7 +47,7 @@ async function collectDonationInfo(donations){
                 lastName : donation.donor.last_name,
                 TYToEmailAddress: donation.donor.email,
                 donationAmount : donationStr,
-                donationDate : donationDate
+                donationDate : donation.donation_date
 
             }
 
@@ -62,7 +62,9 @@ async function collectDonationInfo(donations){
 
 
 
-function formatDate(utcTime){
+function formatDate(utcTime, name){
+    console.log(name)
+    console.log(utcTime)
   
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October', 'November', 'December']
     

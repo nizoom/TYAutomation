@@ -1,28 +1,25 @@
 async function getDateandTime(){
  
-    let dateAndDate = getTodaysDate()
+    let currentTimeAndYesterdaysDate = getCurrentTimeAndYesterdaysDate()
     
-    // console.log(todaysDate)
-    
-    function getTodaysDate (){
+    function getCurrentTimeAndYesterdaysDate (){
    
-  
-        let tzoffset = (new Date()).getTimezoneOffset() * 60000;
+       let tzoffset = (new Date()).getTimezoneOffset() * 60000;
 
-        
-        const date = new Date(Date.now() - tzoffset ).toISOString() //.split('T')[0]
+       const date = new Date();
 
-    
-        //go back and get date and current time from the same single query
+       const yesterdayMilliseconds = date.setDate(date.getDate() - 1);
 
-       // const currentTime = new Date().toTimeString().split(" ")[0];
+       const yesterday = new Date(yesterdayMilliseconds - tzoffset); //converts to 
 
-        const currentTime = new Date()
+       const currentTime = new Date();
 
-        return [date, currentTime]
+       return [currentTime, yesterday]
     }
- 
-    return dateAndDate
+    
+    // console.log(currentTimeAndYesterdaysDate)
+
+    return currentTimeAndYesterdaysDate
 
 }
 
