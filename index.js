@@ -30,7 +30,9 @@ setInterval(function(){
 
     automateThankYous()
 
-},1800000); // 30 minutes
+},8600000); // 1 day 
+
+// might have to make initdation search params a range of two days again in case it is run at 5pm every day. We would need yesterday 5 pm onward + until 5pm today 
 
 
 async function automateThankYous(){
@@ -50,7 +52,7 @@ async function automateThankYous(){
     
        //3. if any donations occured in the last 10 minutes (AKA since last check) then they are new 
    
-       const newDonations = await checkForNewDonations(todaysDonations, currentTime);
+       const newDonations = await checkForNewDonations(todaysDonations, currentTime); // maybe get rid of this if RC only wants to run every once ever 24 hours
 
 
 
@@ -101,7 +103,7 @@ async function automateThankYous(){
     
 
    
-    //  const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage)
+          const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage)
 
 
   

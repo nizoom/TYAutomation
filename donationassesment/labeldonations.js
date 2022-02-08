@@ -48,6 +48,8 @@ async function labelDonations(donoationsToBeCategorized, currentTime){
 
                     donation.templateName = 'monthly' //this is the only scheduling frequency available from donor box at the moment 
 
+                    donation.startDate = planCheck[0].started_at
+
                     return donation
 
                 } 
