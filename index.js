@@ -41,12 +41,11 @@ async function automateThankYous(){
    
        //1. get current date 
 
-       const [currentTime, yesterday] = await getDateandTime();
-
+       const [currentTime, yesterday, tomrrow]= await getDateandTime();
 
        //2. query donorbox for todays donations
    
-       const todaysDonations = await initDonationSearch(yesterday); //today YYYY-MM-DD 2021-15-12
+       const todaysDonations = await initDonationSearch(yesterday, tomrrow); //today YYYY-MM-DD 2021-15-12
    
 
     
@@ -93,20 +92,18 @@ async function automateThankYous(){
 
          // get a visual 
 
-         donationsInfoWithTemplateLanguage.forEach(( donation, index) => {
-            console.log(index)
-            console.log(donation)
-        })
+        //  donationsInfoWithTemplateLanguage.forEach(( donation, index) => {
+        //     console.log(index)
+        //     console.log(donation)
+        // })
        
-    //    8. pass array of donaitonInfo objects to nodemailer file for sending 
-
-    
+       //    8. pass array of donaitonInfo objects to nodemailer file for sending 
 
    
-          const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage)
+        // const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage);
 
 
-  
+        
 }
 
 

@@ -13,7 +13,7 @@ async function collectDonationInfo(donations){
         //that give us the new donor status and honor status
 
         const arrOfDonationObjForEmail = await Promise.all(donations.map(async donation => {
-            
+     
             const newDonorStatus = await determineDonorFrequency(donation);
 
             const honorStatus =   donation.hasOwnProperty('honor') ? donation.honor: false;// if there is no honor property then honor status is false
@@ -38,7 +38,7 @@ async function collectDonationInfo(donations){
             //save a trimmed version of donation amount when need (when there is no cents)
             const donationStr = (decimalAmount !== '.0' )? unformattedDonation : unformattedDonation.substring(0, decimalIndex)
 
-            
+            console.log(donation.donation_date)
 
             const emailDataObj = {
                 newDonorStatus : newDonorStatus,

@@ -4,24 +4,22 @@ import fetch from 'node-fetch';
 
 import "dotenv/config.js";
 
-async function initDonationSearch(todaysDate){
+async function initDonationSearch(yesterday, tomorrow){
 
     //this function fetches donations for today 
 
     const key = process.env.DONORBOX_KEY;
     const username = process.env.DONORBOX_USERNAME;
 
-
-
     //${yesterday}&date_to=${today} remember date_to includes everything until thay day 
-    //2021-12-07&date_to=
-    //2021-12-24&date_to=
-    async function getTodaysDonations(yesterday){
+    //to do a search from yesterday at 5pm to today at 5pm you need date_from = yeseterday & date_to = tomorrow 
+  
+    async function getTodaysDonations(yesterday, tomorrow){
 
-        
-       //having today be the day BEFORE current day gives donations from current day
+     
+
         try {
-            const result = await fetch (`https://donorbox.org/api/v1/donations?date_from=${yesterday}`, { //double check to see if this is actually picking up new donations from today
+            const result = await fetch (`https://donorbox.org/api/v1/donations?date_from=${yesterday}&date_to=${tomorrow}`, { //double check to see if this is actually picking up new donations from today
                 headers: {
                     'Authorization': 'Basic ' + Buffer.from(`${username}:${key}`).toString('base64'),
                     'X-Result-Count': 100000000
@@ -42,7 +40,7 @@ async function initDonationSearch(todaysDate){
         
     }
 
-    const todaysDonations = await getTodaysDonations(todaysDate)
+    const todaysDonations = await getTodaysDonations(yesterday, tomorrow)
 
   
     return todaysDonations

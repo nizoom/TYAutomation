@@ -8,17 +8,26 @@ async function getDateandTime(){
 
        const date = new Date();
 
-       const yesterdayMilliseconds = date.setDate(date.getDate() - 1);
 
-       const yesterday = new Date(yesterdayMilliseconds - tzoffset); //converts to 
+
+       const yesterdayMilliseconds = date.setDate(date.getDate() - 1)
+
+       const yesterday = new Date(yesterdayMilliseconds - tzoffset); //converts to EST 
+
+
 
        const currentTimeGMT = new Date();
 
        const offset = -300
 
        const currentTimeEST = new Date(currentTimeGMT.getTime() + offset*60*1000)
-      
-       return [currentTimeEST, yesterday]
+
+
+       const tomorrowMilliseconds = date.setDate(date.getDate() + 1)
+
+       const tomorrow = new Date(tomorrowMilliseconds - tzoffset); //converts to EST 
+
+       return [currentTimeEST, yesterday, tomorrow]
     }
     
     // console.log(currentTimeAndYesterdaysDate)
