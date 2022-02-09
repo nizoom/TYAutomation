@@ -100,7 +100,7 @@ async function automateThankYous(){
        //    8. pass array of donaitonInfo objects to nodemailer file for sending 
 
    
-        // const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage);
+        const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage);
 
 
         

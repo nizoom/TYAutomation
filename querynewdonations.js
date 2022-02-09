@@ -13,6 +13,7 @@ async function initDonationSearch(yesterday, tomorrow){
 
     //${yesterday}&date_to=${today} remember date_to includes everything until thay day 
     //to do a search from yesterday at 5pm to today at 5pm you need date_from = yeseterday & date_to = tomorrow 
+    //YYYY-mm-dd format for below
   
     async function getTodaysDonations(yesterday, tomorrow){
 

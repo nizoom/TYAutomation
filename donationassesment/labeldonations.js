@@ -47,19 +47,23 @@ async function labelDonations(donoationsToBeCategorized, currentTime){
                 const scheduledDonationDay = parseInt(planCheck[0].started_at.substring(8), 10) // isolate the day of the month 
                 
                 
-                const indexOfComma = donation.donationDate.indexOf(',')
-                const donationDateDay = parseInt(donation.donationDate.substring(4, indexOfComma), 10)    // day of this specific donation 
+                // const indexOfComma = donation.donationDate.indexOf(',')
+                // const donationDateDay = parseInt(donation.donationDate.substring(4, indexOfComma), 10)    // day of this specific donation 
 
                 console.log(moment(planCheck[0].started_at).format("MMMM Do YYYY")); 
 
-                const starDate = moment(planCheck[0].started_at).format("MMMM Do YYYY") //convert YYYY-MM-DD to reading format Month, Day Y
+                const startDate = moment(planCheck[0].started_at).format("MMMM Do YYYY") //convert YYYY-MM-DD to reading format Month, Day Y
 
-                if(scheduledDonationDay === donationDateDay){  // RC wants a monthly donation email only to send once (on the first day they start giving)
+                // const formattedCurrentTime = moment(currentTime).format("MMMM Do YYYY") // make startDate and formattedCurrentTime the same format so they can be compared below
+                console.log(donation.donationDate)
+        
+
+                if(scheduledDonationDay === donation.donationDate){  // RC wants a monthly donation email only to send once (on the first day they start giving)
                     console.log('monthly donation');
 
                     donation.templateName = 'monthly' //this is the only scheduling frequency available from donor box at the moment 
 
-                    donation.startDate = starDate;
+                    donation.startDate = startDate;
 
                     return donation
 
