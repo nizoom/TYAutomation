@@ -1,7 +1,4 @@
-import donorPlanStatus from '../querydonorplan.js'
-import moment from 'moment'
-
-async function labelDonations(donoationsToBeCategorized, currentTime){
+async function labelDonations(donoationsToBeCategorized){
 
     //this function is to label the type of each donation through the name of its template file 
 
@@ -23,59 +20,6 @@ async function labelDonations(donoationsToBeCategorized, currentTime){
 
             return donation;
 
-        }
-        
-        //recurringdonor donation would have newDonorStatus = false and honorStatus = false
-
-        if(donation.newDonorStatus === false && donation.honorStatus === false){
-            //query donation donation is from a scheduled plan then 
-
-            const planCheck = await donorPlanStatus(donation.donorID)
-
-
-            if(planCheck.length < 1){
-               
-                //not from a donation plan and is a regular donor than has donated more than once 
-                donation.templateName = 'recurringdonor'
-
-                return donation;
-            } else {
-                // if donation is from a scheduled plan then add then template name 
-
-                //if scheduled day of the month is same as as todays day of the month then it is part of the monthly plan . Otherwise it is possible they donated on a different day and not through their monthly donation
-
-                const scheduledDonationDay = parseInt(planCheck[0].started_at.substring(8), 10) // isolate the day of the month 
-                
-                
-                // const indexOfComma = donation.donationDate.indexOf(',')
-                // const donationDateDay = parseInt(donation.donationDate.substring(4, indexOfComma), 10)    // day of this specific donation 
-
-                console.log(moment(planCheck[0].started_at).format("MMMM Do YYYY")); 
-
-                const startDate = moment(planCheck[0].started_at).format("MMMM Do YYYY") //convert YYYY-MM-DD to reading format Month, Day Y
-
-                // const formattedCurrentTime = moment(currentTime).format("MMMM Do YYYY") // make startDate and formattedCurrentTime the same format so they can be compared below
-                console.log(donation.donationDate)
-        
-
-                if(scheduledDonationDay === donation.donationDate){  // RC wants a monthly donation email only to send once (on the first day they start giving)
-                    console.log('monthly donation');
-
-                    donation.templateName = 'monthly' //this is the only scheduling frequency available from donor box at the moment 
-
-                    donation.startDate = startDate;
-
-                    return donation
-
-                } 
-               
-                // else it is just a coincidence and they are donating in addition to their scheduled donation 
-                donation.templateName = 'recurringdonor'
-
-                return donation;
-           
-            }
-           
         }
 
           //honoree obj would have the property honoreeName 
@@ -111,4 +55,55 @@ export default labelDonations
 
 
 
-// categorizeDonations(donoationsToBeCategorized)
+     //recurringdonor donation would have newDonorStatus = false and honorStatus = false
+
+        // if(donation.newDonorStatus === false && donation.honorStatus === false){
+        //     //query donation donation is from a scheduled plan then 
+
+        //     const planCheck = await donorPlanStatus(donation.donorID)
+
+
+        //     if(planCheck.length < 1){
+               
+        //         //not from a donation plan and is a regular donor than has donated more than once 
+        //         donation.templateName = 'recurringdonor'
+
+        //         return donation;
+        //     } else {
+        //         // if donation is from a scheduled plan then add then template name 
+
+        //         //if scheduled day of the month is same as as todays day of the month then it is part of the monthly plan . Otherwise it is possible they donated on a different day and not through their monthly donation
+
+        //         const scheduledDonationDay = parseInt(planCheck[0].started_at.substring(8), 10) // isolate the day of the month 
+                
+                
+        //         // const indexOfComma = donation.donationDate.indexOf(',')
+        //         const donationDateDay = parseInt(donation.donationDate.substring(4, indexOfComma), 10)    // day of this specific donation 
+
+        //         console.log(moment(planCheck[0].started_at).format("MMMM Do YYYY")); 
+
+        //         const startDate = moment(planCheck[0].started_at).format("MMMM Do YYYY") //convert YYYY-MM-DD to reading format Month, Day Y
+
+        //         // const formattedCurrentTime = moment(currentTime).format("MMMM Do YYYY") // make startDate and formattedCurrentTime the same format so they can be compared below
+        //         console.log(donation.donationDate)
+        
+
+        //         if(scheduledDonationDay === donationDateDay){  // RC wants a monthly donation email only to send once (on the first day they start giving)
+        //             console.log('monthly donation');
+
+        //             donation.templateName = 'monthly' //this is the only scheduling frequency available from donor box at the moment 
+
+        //             donation.startDate = startDate;
+
+        //             return donation
+
+        //         } 
+               
+        //         // else it is just a coincidence and they are donating in addition to their scheduled donation 
+        //         donation.templateName = 'recurringdonor'
+
+        //         return donation;
+           
+        //     }
+           
+        // }

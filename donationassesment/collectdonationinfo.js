@@ -38,7 +38,7 @@ async function collectDonationInfo(donations){
             //save a trimmed version of donation amount when need (when there is no cents)
             const donationStr = (decimalAmount !== '.0' )? unformattedDonation : unformattedDonation.substring(0, decimalIndex)
 
-     
+            // console.log(donation.donation_date)
 
             const emailDataObj = {
                 newDonorStatus : newDonorStatus,

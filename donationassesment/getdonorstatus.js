@@ -11,7 +11,7 @@ async function determineDonorFrequency(donation){
 
     const donorID = donation.donor.id;
 
-
+    
     const donorInfo = await searchForDonorById(donorID)
   
     //drill down on donorInfo to get donations count from that donor

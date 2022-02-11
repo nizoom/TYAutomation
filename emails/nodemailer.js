@@ -55,7 +55,7 @@ async function createNewEmail(donation){
 
       from: 'cohen@commonthreadsproject.org', //ThankYouFromCTP@outlook.com' ALL TESTING USE THIS EMAIL 
       to: donation.TYToEmailAddress, //['info@commonthreadsproject.org', donation.TYToEmailAddress],  //['cohen@commonthreadsproject.org'],//'cohen@commonthreadsproject.org'], 
-      bcc : 'nissimram1812@gmail.com',
+      bcc : ['nissimram1812@gmail.com','cohen@commonthreadsproject.org'],
       subject: donation.emailSubject,
       text: '',
       html: htmlToSend,

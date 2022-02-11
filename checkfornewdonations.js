@@ -7,7 +7,7 @@ async function checkForNewDonations(donations, currentTime){
 
     //get previous time 
 
-    const previousTime = moment(currentTime).subtract(1, 'days').toDate(); // this defines the window in which a donation is considered 'new'
+    const previousTime = moment(currentTime).subtract(50, 'days').toDate(); // this defines the window in which a donation is considered 'new'
 
     
     
@@ -26,7 +26,7 @@ async function checkForNewDonations(donations, currentTime){
      
 
         if(timeOfDonation.isAfter(moment(previousTime))) {
-            console.log('noted')
+               // console.log('noted')
               //then push to newDonations array 
             donation.donation_date = moment(donation.donation_date).utcOffset('-0500').format('ll'); 
 
@@ -35,7 +35,7 @@ async function checkForNewDonations(donations, currentTime){
         } else {
                 // for some reason the questions obj is treated as its own donation element 
                 
-                console.log(`this donation from ${donation.donor.name} occured before last check at ` + previousTime)
+                // console.log(`this donation from ${donation.donor.name} occured before last check at ` + previousTime)
             
 
         }

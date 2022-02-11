@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 import "dotenv/config.js";
 
-async function donorPlanStatus(){
+async function donorPlanStatus(donorID){
     const key = process.env.DONORBOX_KEY;
     const username = process.env.DONORBOX_USERNAME;
 
@@ -10,7 +10,7 @@ async function donorPlanStatus(){
 
     // e.g. {GET} /api/v1/plans?donor_id=XXXXXXX
 
-    return await getDonorPlanStatus(1148128);
+    return await getDonorPlanStatus(donorID);
     
     async function getDonorPlanStatus(donorID){
 
@@ -28,7 +28,7 @@ async function donorPlanStatus(){
         
         } catch (error) {
             console.log('ERROR')
-            console.log(error)
+            console.dir(error)
         }
 
     }
