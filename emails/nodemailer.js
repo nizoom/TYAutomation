@@ -18,9 +18,6 @@ import handlebars from 'handlebars'
 async function createNewEmail(donation){
 
 
-
-  // console.log(donation)
-
   dotenv.config({path: "../.env"});
 
 
@@ -78,12 +75,6 @@ async function createNewEmail(donation){
   })
 
 
-  
-    // console.log(process.env.DONORBOX_KEY)
- 
-
-    // const hbs = nodemailerExpressHandlebars
-
     let transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -95,7 +86,6 @@ async function createNewEmail(donation){
         refreshToken: process.env.OAUTH_REFRESH_TOKEN  
       }
     });
-
 
 
  }

@@ -18,7 +18,7 @@ async function determineDonorFrequency(donation){
     const newDonorStatus = donorInfo.donations_count > 1 ? false : true; 
 
     async function searchForDonorById(id){
-        // 5767214,1148128
+    
         try{
             const donorInfo = await fetch(`https://donorbox.org/api/v1/donors?id=${id}`, { 
             headers: {
@@ -40,12 +40,11 @@ async function determineDonorFrequency(donation){
     }
 
 
-//    console.log(newDonorStatus)
+
     return newDonorStatus
 }
 
 export default determineDonorFrequency
 
-// you probably can have new donor and honor donor so honor donor should probably trump new donor 
+// you probably can have new donor and honor donor so honor donor should trump new donor 
 
-//{GET} /api/v1/donors?id=XXX

@@ -1,24 +1,18 @@
 async function labelDonations(donoationsToBeCategorized){
 
-    //this function is to label the type of each donation through the name of its template file 
+    //this function is to label the type of each donation with the name of its template file 
 
     //then add these pieces of data to the object in an accessible way 
 
-    // there will be 5 option for template file names: 'newdonor', 'recurringdonor', 'honorer', 'honoree', monthly 
+    // there will be 5 option for template file names: 'newdonor', 'recurringdonor', 'honorer', 'honoree', monthly (this option has already been assigned in applicable)
     
-
-    // console.log(donoationsToBeCategorized.length)
-
-    console.log('labedl donations fired');
 
     const labelledDonations = await Promise.all(donoationsToBeCategorized.map(async donation => {
 
 
-        console.log(donation)
-
         // the only donations who have this property at THIS stage in the program are the valid monthly donations because those are the ones who have been assigned no step 4.5
 
-        if(donation.hasOwnProperty('templateName')){
+        if(donation.hasOwnProperty('templateName')){ // no action is needed
             return donation 
         }
         

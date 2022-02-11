@@ -6,7 +6,6 @@ async function initNodeMailer(donations) {
 
     //loop through donations and pass each obj to nodemailer
 
-    // console.log('we made it to here ' + donations)
 
     const mailResults = await Promise.all(donations.map(async donation => {
         

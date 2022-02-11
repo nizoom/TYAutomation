@@ -1,6 +1,6 @@
 async function addCustomLanguage(donations){
 
-    // console.log(donations)
+
     //there are instances in the email templates where default/static language gives way to dynamic language based on the properties of each donation
 
     //here we will go through each donation and add properties that will plug into the dynamic parts of the template
@@ -13,9 +13,9 @@ async function addCustomLanguage(donations){
 
         //if block criteria will be determined by templateName
 
-        //newDonor template does not need any extra language outside of waht is already  provided by the donation obj. Variable language is irstName, donationAmount, and donationDate
+        //newDonor template does not need any extra language outside of what is already provided by the donation obj. Variable language is irstName, donationAmount, and donationDate
 
-        //recurringDonor template does not need any extra language outside of waht is already provided by the donation obj. Variable language is firstName, donationAmount, and donationDate
+        //recurringDonor template does not need any extra language outside of what is already provided by the donation obj. Variable language is firstName, donationAmount, and donationDate
 
         if(donation.templateName === 'honorer') {
 
@@ -59,7 +59,7 @@ async function addCustomLanguage(donations){
 
             const acknowledgeHonorOrMemoryPhrase = (donation.type === 'In honor of') ? 'honor you' : `remember ${donation.honoreeName}`;
 
-            const customMessageFromDonor = (donation.messageFromHonorer !== '' ) ? `They write: ${donation.messageFromHonorer}` : '' ;
+            // const customMessageFromDonor = (donation.messageFromHonorer !== '' ) ? `They write: ${donation.messageFromHonorer}` : '' ;
 
             donation.acknowledgementPhrase = acknowledgeHonorOrMemoryPhrase;
 

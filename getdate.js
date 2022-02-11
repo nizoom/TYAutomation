@@ -30,12 +30,10 @@ async function getDateandTime(){
        return [currentTimeEST, yesterday, tomorrow]
     }
     
-    // console.log(currentTimeAndYesterdaysDate)
 
     return currentTimeAndYesterdaysDate
 
 }
 
-// getDateandTime();
 
 export default getDateandTime;

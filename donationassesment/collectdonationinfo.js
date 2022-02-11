@@ -20,8 +20,6 @@ async function collectDonationInfo(donations){
 
             //convert date to a more email readable format
 
-            // const donationDate = formatDate(donation.donation_date, donation.donor.first_name)
-
 
             //contains a decimal where it may not need one such as 100.0
             const unformattedDonation = donation.amount
@@ -33,7 +31,7 @@ async function collectDonationInfo(donations){
             const decimalAmount = unformattedDonation.substring(decimalIndex)
 
           
-            //else (it has cents then keep it)
+            //else (if has cents then keep it)
 
             //save a trimmed version of donation amount when need (when there is no cents)
             const donationStr = (decimalAmount !== '.0' )? unformattedDonation : unformattedDonation.substring(0, decimalIndex)

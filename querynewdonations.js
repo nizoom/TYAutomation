@@ -6,7 +6,6 @@ import "dotenv/config.js";
 
 async function initDonationSearch(yesterday, tomorrow){
 
-    //this function fetches donations for today 
 
     const key = process.env.DONORBOX_KEY;
     const username = process.env.DONORBOX_USERNAME;
