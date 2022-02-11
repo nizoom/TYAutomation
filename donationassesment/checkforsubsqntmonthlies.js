@@ -3,22 +3,51 @@ import donorPlanStatus from '../querydonorplan.js'
 import moment from 'moment'
 
 async function checkForSubsequentMonthlies(donations, currentTime){
-    // console.log('BURP');
+   
     // console.log(donations);
 
-    let filteredDonations = [];
+
+    function timeout(ms){
+        return new Promise(resolve => setTimeout(resolve, ms))
+    }
+
+    const result =  await asyncForEach(donations, determineMonthlyDonationStatus)
+    
+    
+    async function asyncForEach(arrOfDonations, callback){
+
+        let filteredDonations = [];
+
+        for(let index = 0; index < arrOfDonations.length ; index++){
+            
+
+                console.log('BURP');
+
+                const processedDonation = await callback(arrOfDonations[index])
+
+                if(processedDonation !== undefined){
+
+                    filteredDonations.push(processedDonation)
+
+                }
+
+                console.log('plan Checked ' + index)
+
+                timeout(1000 * index)
+  
+        }
+    
+        return filteredDonations;
+    }
 
 
-    await Promise.all(donations.map(async donation => {
+    
+    async function determineMonthlyDonationStatus(donation){
         //query donation donation is from a scheduled plan then 
         // console.log(donation.donorID)
-        const index = donations.indexOf(donation)
-        setTimeout(async function(){
-        
-  
-    
+
         const planCheck = await donorPlanStatus(donation.donorID)
-        console.log('plan Checked ' + index)
+      
        
         // console.log(planCheck)
         
@@ -36,7 +65,7 @@ async function checkForSubsequentMonthlies(donations, currentTime){
 
             const formattedCurrentTime = moment(currentTime).format("MMMM Do YYYY") // make startDate and formattedCurrentTime the same format so they can be compared below
            
-            // console.log(startDate);
+            console.log(startDate);
             // console.log(formattedCurrentTime);
             
             // console.log('BREAK');
@@ -48,19 +77,19 @@ async function checkForSubsequentMonthlies(donations, currentTime){
 
                 donation.startDate = startDate;
 
-                filteredDonations.push(donation)
+                return donation
 
             } else {
                 // from a monthly donor but a subsequent donation from the first
             }
         } else {
             // a one off donation - not from a monthly donation 
-            filteredDonations.push(donation)
+            return donation
          }
-        }, 2000 * index)
-    }))
+        
+    }
   
-    return filteredDonations
+   return result
 }
 
 export default checkForSubsequentMonthlies;

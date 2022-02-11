@@ -72,12 +72,14 @@ async function automateThankYous(){
    
        const donationInfo = await collectDonationInfo(newDonations);
 
-        //4.5 filter our subsequent monthly donations after the first one
+        //4.5 filter our subsequent monthly donations after the first one 
+
+                // here we also check if a donation is from a monthly donation plan which requires its own unique template
    
        const donotationsWithOutMonthlies = await checkForSubsequentMonthlies(donationInfo, currentTime);
        //5. scan for 'in honor of' donations. For every one of that type create a new object for the honoree because they will need to receive their own email. Then add that object to the donor obj array
        
-       //    console.log(donotationsWithOutMonthlies);
+        // console.log(donotationsWithOutMonthlies);
 
        const donationsWithHonorees =  await generateHonoreeObj(donotationsWithOutMonthlies);
    
@@ -85,9 +87,8 @@ async function automateThankYous(){
 
        //6. Add template HTML filename to each donation object so that nodemailer will know which template to use when the donations are passed to it
 
-                // here we also check if a donation is from a monthly donation plan which requires its own unique template
 
-   
+       console.log('label donations');
        const donationInfoWithTempPath = await labelDonations(donationsWithHonorees);
 
        //7. assess each donation for any custom language to be added to the template email based on the criteria of the donation. This copy language is sourced from the template Google Doc 

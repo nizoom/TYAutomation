@@ -7,7 +7,7 @@ async function checkForNewDonations(donations, currentTime){
 
     //get previous time 
 
-    const previousTime = moment(currentTime).subtract(50, 'days').toDate(); // this defines the window in which a donation is considered 'new'
+    const previousTime = moment(currentTime).subtract(1, 'days').toDate(); // this defines the window in which a donation is considered 'new'
 
     
     
