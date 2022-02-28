@@ -54,7 +54,6 @@ async function automateThankYous(){
 
 
        //3.5. if there are no new donations, then end the program 
-       console.log(todaysDonations);
    
        if(newDonations < 1){
 
