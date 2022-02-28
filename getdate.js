@@ -22,11 +22,10 @@ async function getDateandTime(){
 
        const currentTimeEST = new Date(currentTimeGMT.getTime() + offset*60*1000)
 
+       const tomorrow = getTomorrowsDate(tzoffset);
+    
 
-       const tomorrowMilliseconds = date.setDate(date.getDate() + 1)
-
-       const tomorrow = new Date(tomorrowMilliseconds - tzoffset); //converts to EST 
-
+       
        return [currentTimeEST, yesterday, tomorrow]
     }
     
@@ -35,5 +34,12 @@ async function getDateandTime(){
 
 }
 
+function getTomorrowsDate(offset){
+    const tomorrowsDate = new Date((new Date().getTime() - offset) + 24 * 60 * 60 * 1000);
+    return tomorrowsDate
+}
+
 
 export default getDateandTime;
+
+// getDateandTime();

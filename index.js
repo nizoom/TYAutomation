@@ -41,14 +41,12 @@ async function automateThankYous(){
    
        //1. get current date 
 
-       const [currentTime, yesterday, tomrrow]= await getDateandTime();
+       const [currentTime, yesterday, tomorrow]= await getDateandTime();
 
 
        //2. query donorbox for all donations since yesterday at 5:30 PM 
    
-       const todaysDonations = await initDonationSearch(yesterday, tomrrow); 
-   
-
+       const todaysDonations = await initDonationSearch(yesterday, tomorrow); 
     
        //3. if any donations occured yesterday before 5:30 then they will not be counted (since they were accounted for yesterday) 
    
@@ -56,7 +54,7 @@ async function automateThankYous(){
 
 
        //3.5. if there are no new donations, then end the program 
-
+       console.log(todaysDonations);
    
        if(newDonations < 1){
 
@@ -74,6 +72,8 @@ async function automateThankYous(){
        //4.5 filter our subsequent monthly donations after the first one. If it is the first, then it gets a unique template 
    
        const donotationsWithOutMonthlies = await checkForSubsequentMonthlies(donationInfo, currentTime);
+
+   
 
        if(donotationsWithOutMonthlies.length < 1){
 

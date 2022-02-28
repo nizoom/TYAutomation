@@ -16,8 +16,6 @@ async function initDonationSearch(yesterday, tomorrow){
   
     async function getTodaysDonations(yesterday, tomorrow){
 
-     
-
         try {
             const result = await fetch (`https://donorbox.org/api/v1/donations?date_from=${yesterday}&date_to=${tomorrow}`, { //double check to see if this is actually picking up new donations from today
                 headers: {
@@ -27,7 +25,10 @@ async function initDonationSearch(yesterday, tomorrow){
 
 
             }).then( response => response.json())
-            // console.log(result)
+            // .then(data => {
+            //     console.log(data)
+            //   });
+   
             return result;
         
         } catch (error) {
