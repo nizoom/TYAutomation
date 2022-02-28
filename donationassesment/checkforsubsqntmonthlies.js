@@ -66,7 +66,10 @@ async function checkForSubsequentMonthlies(donations, currentTime){
 
                 return donation
 
-            } else {
+            } // if donationDay !== scheduledDonationDay && donationAmount !== scheduledDonationAmount then they should get a recurring donor email
+            
+            
+            else {
                 // from a monthly donor but a subsequent donation from the first -> returns undefined
             }
         } else {

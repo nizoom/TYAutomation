@@ -75,6 +75,11 @@ async function automateThankYous(){
    
        const donotationsWithOutMonthlies = await checkForSubsequentMonthlies(donationInfo, currentTime);
 
+       if(donotationsWithOutMonthlies.length < 1){
+
+        console.log('All new donations were recurring monthlies which do not require an email')
+
+       }
 
        //5. scan for 'in honor of' donations. For every one of that type create a new object for the honoree because they will need to receive their own email. Then add that object to the donor obj array
 
@@ -103,7 +108,7 @@ async function automateThankYous(){
         //   8. pass array of donaitonInfo objects to nodemailer file for sending 
 
    
-        const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage);
+        // const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage);
 
 
         
