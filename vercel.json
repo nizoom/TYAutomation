@@ -2,14 +2,15 @@
     "version": 2,
     "builds": [
         {
-            "src": "./OGindex.js",
+            "src": "./index.js",
             "use": "@vercel/node"
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/OGindex.js"
+            "dest": "api/index.js"
         }
     ]
+    
   }
