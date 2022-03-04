@@ -24,18 +24,16 @@ import initNodeMailer from './initnodemailer.js';
 
 //so that it starts first time node index js is ran 
 
-// import express from "express"
-// const app = express();
+const express = require("express");
+const app = express();
+const endpoint = require("./api/endpoint");
 
+app.use(express.json({ extended: false }));
 
-// app.use(express.json({ extended: false }));
+app.use("/api/endpoint", endpoint);
 
-// const PORT = process.env.PORT || 8080;
-// app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
-
-// app.post('/test', function(req, res){
-//     res.json('message received')
-// })
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 
 // automateThankYous()
 
