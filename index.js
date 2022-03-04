@@ -32,20 +32,20 @@ import endpoint from "./api/endpoint.js";
 
 app.use(express.json({ extended: false }));
 
-app.use("/api/endpoint", endpoint);
+// app.use("/api/endpoint", endpoint);
 
-// app.use("/api/endpoint", (req, res) => {
-//     try {
-//         res.json({
-//           status: 200,
-//           message: "Get data has successfully",
-//         });
-//       } catch (error) {
-//         console.error(error);
-//         return res.status(500).send("Server error");
-//       }
+app.use("/api/endpoint", (req, res) => {
+    try {
+        res.json({
+          status: 200,
+          message: "Get data has successfully sent from index.js",
+        });
+      } catch (error) {
+        console.error(error);
+        return res.status(500).send("Server error");
+      }
 
-// });
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));

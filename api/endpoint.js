@@ -13,7 +13,7 @@ const router = express.Router();
         try {
           res.json({
             status: 200,
-            message: "Get data has successfully",
+            message: "Get data successfully",
           });
         } catch (error) {
           console.error(error);
