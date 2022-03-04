@@ -24,7 +24,20 @@ import initNodeMailer from './initnodemailer.js';
 
 //so that it starts first time node index js is ran 
 
-automateThankYous()
+import express from "express"
+const app = express();
+
+
+app.use(express.json({ extended: false }));
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
+
+app.post('/test', function(req, res){
+    res.json('message received')
+})
+
+// automateThankYous()
 
 
 
@@ -114,11 +127,3 @@ async function automateThankYous(){
 }
 
 
-import express from "express"
-const app = express();
-
-
-app.use(express.json({ extended: false }));
-
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
