@@ -28,13 +28,11 @@ import express from "express";
 
 const app = express();
 
-import endpoint from "./api/endpoint.js";
-
 app.use(express.json({ extended: false }));
 
 // app.use("/api/endpoint", endpoint);
 
-app.use("/api/endpoint", (req, res) => {
+app.use("/index", (req, res) => {
     try {
         res.json({
           status: 200,
