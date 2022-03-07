@@ -45,7 +45,7 @@ app.get("/", function (req, res) {
 
 app.use("/index", (req, res) => {
     try {
-       
+        automateThankYous();
         res.json({
           status: 200,
           message: "PLZZZ index.js",
@@ -69,7 +69,7 @@ app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 
 // },86400000); // runs once a day after initial start 
   
-automateThankYous();
+
 
 async function automateThankYous(){
 
