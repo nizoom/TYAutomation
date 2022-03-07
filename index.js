@@ -38,8 +38,8 @@ app.get("/", function (req, res) {
 })
 
 // // start the server listening for requests
-app.listen(process.env.PORT || 3000, 
-	() => console.log("Server is running..."));
+// app.listen(process.env.PORT || 3000, 
+// 	() => console.log("Server is running..."));
 
   
 
@@ -69,7 +69,7 @@ app.use("/index", (req, res) => {
 
 // },86400000); // runs once a day after initial start 
   
-
+automateThankYous();
 
 async function automateThankYous(){
 
