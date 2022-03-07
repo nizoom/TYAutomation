@@ -34,7 +34,7 @@ app.use(express.json({ extended: false }));
 
 app.use("/index", (req, res) => {
     try {
-        automateThankYous()
+        initNodeMailer([{templateName : 'newdonor'}])
         res.json({
           status: 200,
           message: "Get data has successfully sent from index.js",
@@ -49,7 +49,7 @@ app.use("/index", (req, res) => {
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 
- automateThankYous()
+
 
 
 
@@ -63,7 +63,7 @@ setInterval(function(){
 
 async function automateThankYous(){
 
-       initNodeMailer([{templateName : 'newdonor'}])
+      
 
        console.log('fired')
    
