@@ -37,7 +37,7 @@ async function checkForSubsequentMonthlies(donations, currentTime){
 
     
     async function determineMonthlyDonationStatus(donation){
-
+    
         const planCheck = await donorPlanStatus(donation.donorID)
       
         

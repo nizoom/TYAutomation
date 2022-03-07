@@ -37,7 +37,7 @@ app.use("/index", (req, res) => {
         initNodeMailer([{templateName : 'newdonor'}])
         res.json({
           status: 200,
-          message: "Get data has successfully sent from index.js",
+          message: "PLZZZ index.js",
         });
       } catch (error) {
         console.error(error);
@@ -46,11 +46,11 @@ app.use("/index", (req, res) => {
 
 });
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
+const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 
 
-
+// initNodeMailer([{templateName : 'newdonor'}])
 
 // setInterval(function(){
 
@@ -59,84 +59,86 @@ app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 // },86400000); // runs once a day after initial start 
   
 
-// async function automateThankYous(){
+automateThankYous();
+
+async function automateThankYous(){
 
       
 
-//        console.log('fired')
+       console.log('fired')
    
-//        //1. get current date 
+       //1. get current date 
 
-//        const [currentTime, yesterday, tomorrow]= await getDateandTime();
+       const [currentTime, yesterday, tomorrow]= await getDateandTime();
 
 
-//        //2. query donorbox for all donations since yesterday at 5:30 PM 
+       //2. query donorbox for all donations since yesterday at 5:30 PM 
    
-//        const todaysDonations = await initDonationSearch(yesterday, tomorrow); 
+       const todaysDonations = await initDonationSearch(yesterday, tomorrow); 
     
-//        //3. if any donations occured yesterday before 5:30 then they will not be counted (since they were accounted for yesterday) 
+       //3. if any donations occured yesterday before 5:30 then they will not be counted (since they were accounted for yesterday) 
    
-//        const newDonations = await checkForNewDonations(todaysDonations, currentTime); 
+       const newDonations = await checkForNewDonations(todaysDonations, currentTime); 
 
 
-//        //3.5. if there are no new donations, then end the program 
+       //3.5. if there are no new donations, then end the program 
    
-//        if(newDonations < 1){
+       if(newDonations < 1){
 
-//            console.log('no donations since last check')
+           console.log('no donations since last check')
    
-//            return;
+           return;
    
-//        }
+       }
    
-//        //4. use donor ID from from each donation so that we can see what type of donor they are. This step also strips down the donation object to the important properties only.
+       //4. use donor ID from from each donation so that we can see what type of donor they are. This step also strips down the donation object to the important properties only.
    
-//        const donationInfo = await collectDonationInfo(newDonations);
+       const donationInfo = await collectDonationInfo(newDonations);
 
 
-//        //4.5 filter our subsequent monthly donations after the first one. If it is the first, then it gets a unique template 
+       //4.5 filter our subsequent monthly donations after the first one. If it is the first, then it gets a unique template 
    
-//        const donotationsWithOutMonthlies = await checkForSubsequentMonthlies(donationInfo, currentTime);
+       const donotationsWithOutMonthlies = await checkForSubsequentMonthlies(donationInfo, currentTime);
 
    
 
-//        if(donotationsWithOutMonthlies.length < 1){
+       if(donotationsWithOutMonthlies.length < 1){
 
-//         console.log('All new donations were recurring monthlies which do not require an email')
+        console.log('All new donations were recurring monthlies which do not require an email')
 
-//        }
+       }
 
-//        //5. scan for 'in honor of' donations. For every one of that type create a new object for the honoree because they will need to receive their own email. Then add that object to the donor obj array
+       //5. scan for 'in honor of' donations. For every one of that type create a new object for the honoree because they will need to receive their own email. Then add that object to the donor obj array
 
-//        const donationsWithHonorees =  await generateHonoreeObj(donotationsWithOutMonthlies);
-
-
-//        //6. Add template HTML filename to each donation object so that nodemailer will know which template to use when the donations are passed to it
+       const donationsWithHonorees =  await generateHonoreeObj(donotationsWithOutMonthlies);
 
 
-//        const donationInfoWithTempPath = await labelDonations(donationsWithHonorees);
+       //6. Add template HTML filename to each donation object so that nodemailer will know which template to use when the donations are passed to it
 
-//        //7. assess each donation for any custom language to be added to the template email based on the criteria of the donation. This copy language is sourced from the template Google Doc 
+
+       const donationInfoWithTempPath = await labelDonations(donationsWithHonorees);
+
+       //7. assess each donation for any custom language to be added to the template email based on the criteria of the donation. This copy language is sourced from the template Google Doc 
        
        
 
-//        const donationsInfoWithTemplateLanguage = await addCustomLanguage(donationInfoWithTempPath)
+       const donationsInfoWithTemplateLanguage = await addCustomLanguage(donationInfoWithTempPath)
    
 
-//          // get a visual 
+         // get a visual 
 
-//          donationsInfoWithTemplateLanguage.forEach(( donation, index) => {
-//             console.log(index)
-//             console.log(donation)
-//         })
+         donationsInfoWithTemplateLanguage.forEach(( donation, index) => {
+            console.log(index)
+            console.log(donation)
+        })
        
-//         //   8. pass array of donaitonInfo objects to nodemailer file for sending 
+        //   8. pass array of donaitonInfo objects to nodemailer file for sending 
 
-//         console.log('TEST');
-//         // const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage);
+        console.log('TEST');
+        // const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage);
 
 
         
-// }
+}
 
 

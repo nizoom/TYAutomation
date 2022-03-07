@@ -3,6 +3,8 @@ import fetch from 'node-fetch';
 import "dotenv/config.js";
 
 async function donorPlanStatus(donorID){
+    console.log('looking for monthly DONOR');
+    
     const key = process.env.DONORBOX_KEY;
     const username = process.env.DONORBOX_USERNAME;
 
@@ -33,7 +35,5 @@ async function donorPlanStatus(donorID){
 
     }
 }
-
-donorPlanStatus();
 
 export default donorPlanStatus;

@@ -11,6 +11,7 @@ import nodemailerExpressHandlebars from 'nodemailer-express-handlebars';
 import fs from 'fs'
 
 import handlebars from 'handlebars'
+import { rejects } from 'assert';
 
 
 
@@ -39,7 +40,7 @@ async function createNewEmail(donation){
 
   const __dirname = path.resolve();
 
-  readHTMLFile(__dirname + `/emails/templates/${donation.templateName}.handlebars`, function(err, html){
+  readHTMLFile(__dirname + `/emails/templates/${donation.templateName}.handlebars`, async function(err, html){
 
     const template = handlebars.compile(html);
 
@@ -59,18 +60,27 @@ async function createNewEmail(donation){
 
     };
 
-    transporter.sendMail(mailOptions, function(err, data) {
-      if (err) {
-        console.log("Error " + err);
+    await new Promise((resolve, reject) =>{
+      
+      transporter.sendMail(mailOptions, function(err, data) {
+        if (err) {
+          console.log("Error " + err);
+          reject(err)
+          return `${donation} failed to send`
 
-        return `${donation} failed to send`
+        } else {
+          console.log("Email sent successfully");
+          resolve(data)
 
-      } else {
-        console.log("Email sent successfully");
+          return `${donation} was successfully sent`
+        }
 
-        return `${donation} was successfully sent`
-      }
-    });
+      });
+
+    })
+
+
+
 
   })
 
