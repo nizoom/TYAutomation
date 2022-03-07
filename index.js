@@ -34,6 +34,7 @@ app.use(express.json({ extended: false }));
 
 app.use("/index", (req, res) => {
     try {
+        automateThankYous()
         res.json({
           status: 200,
           message: "Get data has successfully sent from index.js",
