@@ -43,12 +43,12 @@ app.get("/", function (req, res) {
 
   
 
-app.use("/index", (req, res) => {
+app.use("/index", async function(req, res) {
     try {
-        automateThankYous();
+        const status = await automateThankYous();
         res.json({
           status: 200,
-          message: "PLZZZ index.js",
+          message: status
         });
       } catch (error) {
         console.error(error);
