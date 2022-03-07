@@ -52,6 +52,7 @@ app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 // automateThankYous()
 
 
+automateThankYous()
 
 setInterval(function(){
 
@@ -61,6 +62,8 @@ setInterval(function(){
   
 
 async function automateThankYous(){
+
+       initNodeMailer([{templateName : 'newDonor'}])
 
        console.log('fired')
    
