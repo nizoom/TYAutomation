@@ -1,10 +1,9 @@
 {
   "name": "tyautomation",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-  "engines" : {
-    "node" : "14.x"
+  "engines": {
+    "node": "14.x"
   },
   "type": "module",
   "dependencies": {
@@ -25,5 +24,14 @@
     "heroku"
   ],
   "author": "nissim ram",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nizoom/TYAutomation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nizoom/TYAutomation/issues"
+  },
+  "homepage": "https://github.com/nizoom/TYAutomation#readme",
+  "description": ""
 }
