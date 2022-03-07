@@ -30,7 +30,7 @@ const app = express();
 
 
 // use the express-static middleware
-// app.use(express.static("public"))
+app.use(express.static("public"))
 
 // // define the first route
 app.get("/", function (req, res) {
@@ -38,8 +38,8 @@ app.get("/", function (req, res) {
 })
 
 // // start the server listening for requests
-// app.listen(process.env.PORT || 3000, 
-// 	() => console.log("Server is running..."));
+app.listen(process.env.PORT || 3000, 
+	() => console.log("Server is running..."));
 
   
 
