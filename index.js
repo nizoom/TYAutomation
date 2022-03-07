@@ -30,22 +30,22 @@ const app = express();
 
 
 // use the express-static middleware
-app.use(express.static("public"))
+// app.use(express.static("public"))
 
-// define the first route
+// // define the first route
 app.get("/", function (req, res) {
   res.send("<h1>Hello World!</h1>")
 })
 
-// start the server listening for requests
-app.listen(process.env.PORT || 3000, 
-	() => console.log("Server is running..."));
+// // start the server listening for requests
+// app.listen(process.env.PORT || 3000, 
+// 	() => console.log("Server is running..."));
 
   
 
 app.use("/index", (req, res) => {
     try {
-        initNodeMailer([{templateName : 'newdonor'}])
+       
         res.json({
           status: 200,
           message: "PLZZZ index.js",
@@ -70,11 +70,9 @@ app.use("/index", (req, res) => {
 // },86400000); // runs once a day after initial start 
   
 
-automateThankYous();
 
 async function automateThankYous(){
 
-      
 
        console.log('fired')
    
@@ -148,7 +146,7 @@ async function automateThankYous(){
         console.log('TEST');
         // const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage);
 
-
+        initNodeMailer([{templateName : 'newdonor'}])
         
 }
 
