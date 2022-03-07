@@ -15,7 +15,7 @@ async function donorPlanStatus(donorID){
     async function getDonorPlanStatus(donorID){
 
         try {
-            const result = await fetch (`https://donorbox.org/api/v1/plans?donor_id=${donorID}`, { 
+            const result = await fetch (`http://donorbox.org/api/v1/plans?donor_id=${donorID}`, { 
                 headers: {
                     'Authorization': 'Basic ' + Buffer.from(`${username}:${key}`).toString('base64'),
                     'X-Result-Count': 100000000
