@@ -46,13 +46,14 @@ app.get("/", function (req, res) {
 app.use("/index", async function(req, res) {
     try {
         const status = await automateThankYous();
+        console.log(req.headers)
         res.json({
           status: 200,
-          message: status
+          message: 'Connection succesful. Checking for new donations. If there is a valid donation you will be CCd in the TY email.'
         });
       } catch (error) {
         console.error(error);
-        return res.status(500).send("Server error");
+        return res.status(500).send("Connection unsuccessful. Server error");
       }
 
 });
@@ -145,6 +146,8 @@ async function automateThankYous(){
 
         console.log('TEST');
         // const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage);
+
+        //RETURN SUCCESS MESSAGE TO BE THE RETURN VALUE OF automateThankYouss
 
         initNodeMailer([{templateName : 'newdonor'}])
         
