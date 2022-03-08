@@ -144,12 +144,11 @@ async function automateThankYous(){
        
         //   8. pass array of donaitonInfo objects to nodemailer file for sending 
 
-        console.log('TEST');
-        // const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage);
+  
+        const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage);
 
-        //RETURN SUCCESS MESSAGE TO BE THE RETURN VALUE OF automateThankYouss
 
-        initNodeMailer([{templateName : 'newdonor'}])
+        // initNodeMailer([{templateName : 'newdonor'}])
         
 }
 

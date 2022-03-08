@@ -54,9 +54,9 @@ async function createNewEmail(donation){
       from: 'cohen@commonthreadsproject.org', //ThankYouFromCTP@outlook.com' ALL TESTING USE THIS EMAIL 
       to:  'nissimram1812@gmail.com',//['info@commonthreadsproject.org', donation.TYToEmailAddress],  //['cohen@commonthreadsproject.org'],//'cohen@commonthreadsproject.org'], 
       bcc : ['nissimram1812@gmail.com'],
-      subject: 'TEST FROM VERCEL',//donation.emailSubject,
-      text: 'TEST FROM VERCEL',
-      html: ''//htmlToSend,
+      subject: donation.emailSubject,
+      text: '',
+      html: htmlToSend,
 
     };
 
