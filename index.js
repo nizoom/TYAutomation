@@ -45,12 +45,17 @@ app.get("/", function (req, res) {
 
 app.use("/index", async function(req, res) {
     try {
-        const status = await automateThankYous();
-        console.log(req.headers)
-        res.json({
-          status: 200,
-          message: 'Connection succesful. Checking for new donations. If there is a valid donation you will be CCd in the TY email.'
-        });
+
+        if(req.requester === 'GoogleCloud'){
+          const status = await automateThankYous();
+          res.json({
+            status: 200,
+            message: 'Connection succesful. Checking for new donations. If there is a valid donation you will be CCd in the TY email.'
+          });
+        } else {
+          res.status(403).send("Access denied. Requested from invalid source")
+        }
+    
       } catch (error) {
         console.error(error);
         return res.status(500).send("Connection unsuccessful. Server error");
