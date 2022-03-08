@@ -45,7 +45,7 @@ app.get("/", function (req, res) {
 
 app.use("/index", async function(req, res) {
     try {
-
+      console.log(req.requester);
         if(req.requester === 'GoogleCloud'){
           const status = await automateThankYous();
           res.json({
