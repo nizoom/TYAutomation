@@ -21,6 +21,8 @@ import addCustomLanguage from './donationassesment/addcutomlanguage.js';
 
 import initNodeMailer from './initnodemailer.js';
 
+import "dotenv/config.js";
+
 
 //so that it starts first time node index js is ran 
 
@@ -37,16 +39,19 @@ app.get("/", function (req, res) {
   res.send("<h1>Hello World!</h1>")
 })
 
-// // start the server listening for requests
+// start the server listening for requests
 // app.listen(process.env.PORT || 3000, 
 // 	() => console.log("Server is running..."));
 
   
+const requiredHeader = process.env.REQUIRED_HEADER;
+
+
 
 app.use("/index", async function(req, res) {
     try {
 
-        if(req.headers.requester === 'GoogleCloud'){
+        if(req.headers.requester === requiredHeader){
           const status = await automateThankYous();
           res.json({
             status: 200,
@@ -65,16 +70,6 @@ app.use("/index", async function(req, res) {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
-
-
-// initNodeMailer([{templateName : 'newdonor'}])
-
-// setInterval(function(){
-
-//     automateThankYous()
-
-// },86400000); // runs once a day after initial start 
-  
 
 
 async function automateThankYous(){
