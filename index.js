@@ -21,10 +21,10 @@ import addCustomLanguage from './donationassesment/addcutomlanguage.js';
 
 import initNodeMailer from './initnodemailer.js';
 
+import assessLoginAttempt from './templatebuilderfuncs/assesslogin.js';
+
 import "dotenv/config.js";
 
-
-//so that it starts first time node index js is ran 
 
 import express from "express";
 
@@ -36,7 +36,7 @@ app.use(express.static("public"))
 
 // // define the first route
 app.get("/", function (req, res) {
-  res.send("<h1>Hello World!</h1>")
+  res.send("<h1>Welcome</h1>")
 })
 
 // start the server listening for requests
@@ -46,6 +46,12 @@ app.get("/", function (req, res) {
   
 const requiredHeader = process.env.REQUIRED_HEADER;
 
+// LOGIN FUNC FOR TEMPLATE BUILDER UI
+
+app.use("/login", function(req, res){
+  console.log('attempting login');
+  assessLoginAttempt(req.body.attempt)
+})
 
 
 app.use("/index", async function(req, res) {
