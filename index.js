@@ -25,11 +25,14 @@ import assessLoginAttempt from './templatebuilderfuncs/assesslogin.js';
 
 import "dotenv/config.js";
 
+import cors from 'cors'
+
 
 import express from "express";
 
 const app = express();
 
+app.use(cors());
 
 // use the express-static middleware
 app.use(express.static("public"))
@@ -53,6 +56,8 @@ app.use("/login", function(req, res){
   assessLoginAttempt(req.body.attempt)
 })
 
+
+// AUTOMATION 
 
 app.use("/index", async function(req, res) {
     try {
