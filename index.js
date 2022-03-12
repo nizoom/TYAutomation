@@ -53,7 +53,7 @@ const requiredHeader = process.env.REQUIRED_HEADER;
 
 app.use("/login", function(req, res){
   console.log('attempting login');
-  console.log(req);
+  console.log(req.headers.pwAttempt);
   assessLoginAttempt(req.body)
 })
 
