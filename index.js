@@ -55,11 +55,10 @@ const requiredHeader = process.env.REQUIRED_HEADER;
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-
-app.use("/login", urlencodedParser, function(req, res){
+app.use("/login", bodyParser.json(), urlencodedParser, function(req, res){
   console.log('attempting login');
   console.log(req.body);
-  assessLoginAttempt(req.body)
+  // assessLoginAttempt(req.body)
 })
 
 
