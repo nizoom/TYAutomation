@@ -27,6 +27,8 @@ import "dotenv/config.js";
 
 import cors from 'cors'
 
+import bodyParser from 'body-parser';
+
 
 import express from "express";
 
@@ -51,9 +53,12 @@ const requiredHeader = process.env.REQUIRED_HEADER;
 
 // LOGIN FUNC FOR TEMPLATE BUILDER UI
 
-app.use("/login", function(req, res){
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+
+app.use("/login", urlencodedParser, function(req, res){
   console.log('attempting login');
-  console.log(typeof req);
+  console.log(req.body);
   assessLoginAttempt(req.body)
 })
 
