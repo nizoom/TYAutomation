@@ -57,10 +57,13 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.use("/login", bodyParser.json(), urlencodedParser, function(req, res){
   console.log('attempting login');
-  console.log(req.body);
   const pwAttempt = req.body.pwAttempt;
-  console.log(pwAttempt);
-  assessLoginAttempt(req.body)
+  const loginResult = assessLoginAttempt(pwAttempt)
+  if(loginResult){
+    res.send({result : true})
+  } else {
+    res.send({result : false})
+  }
 })
 
 
