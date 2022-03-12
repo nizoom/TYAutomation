@@ -5,8 +5,7 @@ function assessLoginAttempt(attemptedPW){
     const correctPW = process.env.APP_PW
 
     console.log(correctPW);
-   
-    console.log(reqBody)
+
     if(correctPW === attemptedPW){
         console.log('success')
         return  {
