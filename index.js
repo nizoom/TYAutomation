@@ -101,10 +101,9 @@ app.use("/index", async function(req, res) {
 
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 
-// automateThankYous();
 async function automateThankYous(){
 
 
@@ -112,7 +111,7 @@ async function automateThankYous(){
    
        //1. get current date 
 
-       const [currentTime, yesterday, tomorrow]= await getDateandTime();
+       const [currentTime, yesterday, tomorrow] = await getDateandTime();
 
 
        //2. query donorbox for all donations since yesterday at 5:30 PM 
@@ -153,13 +152,15 @@ async function automateThankYous(){
 
        //5. scan for 'in honor of' donations. For every one of that type create a new object for the honoree because they will need to receive their own email. Then add that object to the donor obj array
 
-       const donationsWithHonorees =  await generateHonoreeObj(donotationsWithOutMonthlies);
+       const donationsWithHonorees =  await generateHonoreeObj(donotationsWithOutMonthlies)
+
 
 
        //6. Add template HTML filename to each donation object so that nodemailer will know which template to use when the donations are passed to it
 
 
        const donationInfoWithTempPath = await labelDonations(donationsWithHonorees);
+
 
        //7. assess each donation for any custom language to be added to the template email based on the criteria of the donation. This copy language is sourced from the template Google Doc 
        

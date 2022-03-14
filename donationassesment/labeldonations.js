@@ -4,7 +4,7 @@ async function labelDonations(donoationsToBeCategorized){
 
     //then add these pieces of data to the object in an accessible way 
 
-    // there will be 5 option for template file names: 'newdonor', 'recurringdonor', 'honorer', 'honoree', monthly (this option has already been assigned in applicable)
+    // there will be 5 option for template file names: 'newdonor', 'recurringdonor', 'honorer', 'honoree', monthly (this option has already been assigned if applicable)
     
 
     const labelledDonations = await Promise.all(donoationsToBeCategorized.map(async donation => {
@@ -31,7 +31,14 @@ async function labelDonations(donoationsToBeCategorized){
             
             donation.templateName = 'honoree'
             
-            return donation
+            return donation;
+        }
+
+        if(donation.newDonorStatus === false && donation.honorStatus === false){
+
+            donation.templateName = 'recurringdonor'
+
+            return donation;
         }
 
         //honorer donation would have honorStatus = an obj and not false (which is a boolean value and not an obj)
