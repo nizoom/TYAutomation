@@ -1,4 +1,4 @@
-// WELCOME TO TY AUTOMATION HQ 
+// TY AUTOMATION AND UI SERVER MAIN FILE
 
 
 //Imports 
@@ -48,10 +48,8 @@ app.get("/", function (req, res) {
 // app.listen(process.env.PORT || 3000, 
 // 	() => console.log("Server is running..."));
 
-  
-const requiredHeader = process.env.REQUIRED_HEADER;
 
-// LOGIN FUNC FOR TEMPLATE BUILDER UI
+// LOGIN ENDPOINT + FUNC FOR TEMPLATE BUILDER UI
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -66,8 +64,19 @@ app.use("/login", bodyParser.json(), urlencodedParser, function(req, res){
   }
 })
 
+// SUBMIT ENDPOINT AND FUNCTION FOR TEMPLATE BUILDER UI
+
+app.use("/submitemail", function(req, res){
+  console.log('attempting to send email');
+  console.log(req.body);
+
+})
+
 
 // AUTOMATION 
+
+const requiredHeader = process.env.REQUIRED_HEADER;
+
 
 app.use("/index", async function(req, res) {
     try {
