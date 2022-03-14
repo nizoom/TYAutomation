@@ -68,7 +68,10 @@ app.use("/login", bodyParser.json(), urlencodedParser, function(req, res){
 
 app.use("/submitemail", bodyParser.json(), urlencodedParser,function(req, res){
   console.log('attempting to send email');
-  console.log(req.body);
+  console.log(req.body.emailObj);
+
+  const arrOfEmailObjs = req.body.emailObj;
+  initNodeMailer(arrOfEmailObjs)
 
 })
 
@@ -101,7 +104,7 @@ app.use("/index", async function(req, res) {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 
-
+automateThankYous();
 async function automateThankYous(){
 
 

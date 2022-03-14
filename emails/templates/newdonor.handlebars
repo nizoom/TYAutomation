@@ -16,7 +16,7 @@
 
 
             <div>
-                <h1 id = 'firstName' style  = "font-size : medium; font-weight: 200;" >  Dear  {{firstName}},</h1>
+                <h1 id = 'firstName' style  = "font-size : medium; font-weight: 200;" >  Dear  {{firstName}} {{dearDonorStr}},</h1>
             
 
                 <p style = 'padding: 10px 0 10px 0;'> Welcome to the Common Threads family! We are delighted you have chosen to join our 
@@ -75,8 +75,7 @@
 
                 <p style = 'padding-top: 10px' >The women and girls of Common Threads Project appreciate your belief in the possibility of healing. </p>
 
-                <p style = 'font-weight: bold;'> Please let this note serve as your receipt for a fully tax-deductible contribution of ${{donationAmount}} to Common Threads Project on {{donationDate}}. No goods or services were provided in exchange for this contribution. 
-                    Common Threads Project is an exempt organization as described in Section 501(c)(3) of the Internal Revenue Code; EIN: 81-4212971. </p>
+                <p style = 'font-weight: bold;'> {{taxParagraph}} </p>
                 <div id = 'output'> 
                 </div>
 

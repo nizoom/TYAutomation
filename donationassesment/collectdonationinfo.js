@@ -46,7 +46,10 @@ async function collectDonationInfo(donations){
                 TYToEmailAddress: donation.donor.email,
                 donationAmount : donationStr,
                 donationDate : donation.donation_date,
-                donorID : donation.donor.id
+                donorID : donation.donor.id,
+                taxParagaph : `Please let this note serve as your receipt for a fully tax-deductible contribution of  ${donationStr} 
+                to Common Threads Project on ${donation.donation_date}   No goods or services were provided in exchange for this contribution. Common Threads Project is an 
+                exempt organization as described in Section 501(c)(3) of the Internal Revenue Code; EIN: 81-4212971.` 
 
             }
 

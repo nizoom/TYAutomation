@@ -31,7 +31,7 @@ async function addCustomLanguage(donations){
 
             // const recipientDestinaiton = (honorInfo.recipient_email === '') ? honorInfo.recipient_address: honorInfo.recipient_email;
 
-            const inMemoryOfSentence = `Because you have chosen to donate in memory of ${honorInfo.honoree_name}}, we will send an acknowledgement to ${honorInfo.recipient_email}. What a meaningful tribute.`
+            const inMemoryOfSentence = `Because you have chosen to donate in memory of ${honorInfo.honoree_name}, we will send an acknowledgement to ${honorInfo.recipient_email}. What a meaningful tribute.`
 
             const honorSentence = `Because you have chosen to honor ${honorInfo.honoree_name} with your contribution, we will send your message in an acknowledgement to them.  What a lovely tribute!`
 
@@ -55,19 +55,41 @@ async function addCustomLanguage(donations){
 
         if (donation.templateName === 'honoree') {
 
-             //honoree template needs honoree name, messageFromHonorer, honorerFirstName, honorerLastName
+            // is the recipient and honoree the same person? 
 
-            const acknowledgeHonorOrMemoryPhrase = (donation.type === 'In honor of') ? 'honor you' : `remember ${donation.honoreeName}`;
+            const honoreeSameAsRecipient = donation.honoreeName === donation.recipientName ? true : false
+
+            const inHonorOrInMemoryStr = honoreeSameAsRecipient ? 'in your honor' : determineThemStr(donation.type);
+
+            // 
+            function determineThemStr(honorOrMem){
+                return (donation.type === 'In honor of' ? `in honor of ${donation.honoreeName}` : `in memory of ${donation.honoreeName}`) 
+
+            }
+            //honoree template needs honoree name, messageFromHonorer, honorerFirstName, honorerLastName
+
+            const gratefulTheyChoseToStr = determineGratefulStr();
+
+            function determineGratefulStr(){
+               if( donation.type === 'In honor of' ) {
+                   return (honoreeSameAsRecipient ? 'honor you': 'honor them')
+               } else {
+                   return 'honor them'
+               }
+            }
 
             // const customMessageFromDonor = (donation.messageFromHonorer !== '' ) ? `They write: ${donation.messageFromHonorer}` : '' ;
 
-            donation.acknowledgementPhrase = acknowledgeHonorOrMemoryPhrase;
+            donation.gratefulTheyChoseToStr = gratefulTheyChoseToStr;
+
+            donation.inHonorOrInMemoryStr = inHonorOrInMemoryStr;
 
             //below property may be unnecessary 
 
             // donation.customMessageFromDonor = customMessageFromDonor;
 
             donationsWithCustomLanguage.push(donation)
+
 
             return;
                 
