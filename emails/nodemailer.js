@@ -38,11 +38,8 @@ async function createNewEmail(donation, getResponseFromNodeMailer){
   }
 
 
-  const __dirname = path.resolve();
- 
-  const sendEmail = async () => {
-    
-    let response = await 
+    const __dirname = path.resolve();
+
   
 
     readHTMLFile(__dirname + `/emails/templates/${donation.templateName}.handlebars`, async function(err, html){
@@ -101,15 +98,11 @@ async function createNewEmail(donation, getResponseFromNodeMailer){
      })
 
     })
-    console.log(response);
 
-    return response;
 
-  }
+}
 
    
-  
- }
 
 
 
