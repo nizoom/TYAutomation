@@ -40,7 +40,12 @@ async function createNewEmail(donation){
 
   const __dirname = path.resolve();
 
-  const emailResult = await readHTMLFile(__dirname + `/emails/templates/${donation.templateName}.handlebars`, async function(err, html){
+  sendMail = async () => {
+    
+    let response = await 
+  
+
+    readHTMLFile(__dirname + `/emails/templates/${donation.templateName}.handlebars`, async function(err, html){
 
     const template = handlebars.compile(html);
 
@@ -83,22 +88,25 @@ async function createNewEmail(donation){
 
         } else {
           console.log("Email sent successfully");
-          console.log(data)
+          console.log(data.response)
           resolve(data.response)
 
           // return `${donation} was successfully sent`
         }
 
-      });
+       });
+
+     })
 
     })
+    console.log(response);
 
-  })
+    return response;
 
- 
-    console.log(emailResult);
-    return emailResult;
+  }
 
+   
+  
  }
 
 
