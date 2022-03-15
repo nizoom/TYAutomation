@@ -15,19 +15,25 @@ async function initNodeMailer(donations) {
 
        const index = donations.indexOf(donation);
 
-       setTimeout( async () => {
+       return new Promise ((resolve) => {
 
-            const emailStatus = await createNewEmail(donation)
+            setTimeout( async () => {
 
-            return emailStatus
-        
+                const emailStatus = await createNewEmail(donation)
 
-       }, 500 * index)  
+                resolve(emailStatus)
+            
+
+        }, 500 * index) 
+
+       })
+
+    
 
     }))
 
     //store results 
-
+    console.log(mailResults)
     return mailResults;
 }
 
