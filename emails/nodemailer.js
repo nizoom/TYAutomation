@@ -40,7 +40,7 @@ async function createNewEmail(donation){
 
   const __dirname = path.resolve();
 
-  readHTMLFile(__dirname + `/emails/templates/${donation.templateName}.handlebars`, async function(err, html){
+  const emailResult = await readHTMLFile(__dirname + `/emails/templates/${donation.templateName}.handlebars`, async function(err, html){
 
     const template = handlebars.compile(html);
 
@@ -60,7 +60,7 @@ async function createNewEmail(donation){
 
     };
 
-    await new Promise((resolve, reject) =>{
+    return await new Promise((resolve, reject) =>{
       
       transporter.sendMail(mailOptions, function(err, data) {
         if (err) {
@@ -79,11 +79,7 @@ async function createNewEmail(donation){
 
     })
 
-
-
-
   })
-
 
     let transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -97,6 +93,7 @@ async function createNewEmail(donation){
       }
     });
 
+    return emailResult;
 
  }
 
