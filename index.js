@@ -72,7 +72,7 @@ app.use("/submitemail", bodyParser.json(), urlencodedParser, async function(req,
 
   const arrOfEmailObjs = req.body.emailObj;
   const results = await initNodeMailer(arrOfEmailObjs)
-  console.log(results);
+
 
 })
 

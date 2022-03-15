@@ -16,7 +16,9 @@ async function initNodeMailer(donations) {
 
             setTimeout( async () => {
 
-                const emailStatus = await createNewEmail(donation)
+                const emailStatus = await createNewEmail(donation) //maybe add .thens to it
+
+                console.log(emailStatus);
 
                 resolve(emailStatus)
             

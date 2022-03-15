@@ -92,7 +92,7 @@ async function createNewEmail(donation){
         refreshToken: process.env.OAUTH_REFRESH_TOKEN  
       }
     });
-
+    console.log(emailResult);
     return emailResult;
 
  }
