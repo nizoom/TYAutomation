@@ -60,19 +60,33 @@ async function createNewEmail(donation){
 
     };
 
-    return await new Promise((resolve, reject) =>{
+    return new Promise((resolve, reject) =>{
+
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          type: 'OAuth2',
+          user: process.env.MAIL_USERNAME, 
+          pass: process.env.MAIL_PASSWORD, 
+          clientId: process.env.OAUTH_CLIENTID, 
+          clientSecret: process.env.OAUTH_CLIENT_SECRET, 
+          refreshToken: process.env.OAUTH_REFRESH_TOKEN  
+        }
+      });
+
       
       transporter.sendMail(mailOptions, function(err, data) {
         if (err) {
           console.log("Error " + err);
           reject(err)
-          return `${donation} failed to send`
+          // return `${donation} failed to send`
 
         } else {
           console.log("Email sent successfully");
-          resolve(data)
+          console.log(data)
+          resolve(data.response)
 
-          return `${donation} was successfully sent`
+          // return `${donation} was successfully sent`
         }
 
       });
@@ -81,17 +95,7 @@ async function createNewEmail(donation){
 
   })
 
-    let transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        type: 'OAuth2',
-        user: process.env.MAIL_USERNAME, 
-        pass: process.env.MAIL_PASSWORD, 
-        clientId: process.env.OAUTH_CLIENTID, 
-        clientSecret: process.env.OAUTH_CLIENT_SECRET, 
-        refreshToken: process.env.OAUTH_REFRESH_TOKEN  
-      }
-    });
+ 
     console.log(emailResult);
     return emailResult;
 
