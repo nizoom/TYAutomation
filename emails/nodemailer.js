@@ -16,7 +16,7 @@ import { rejects } from 'assert';
 
 
 
-async function createNewEmail(donation, getResponseFromNodeMailer){
+async function createNewEmail(donation, sendResponseFromNodeMailerToClient){
 
 
   dotenv.config({path: "../.env"});
@@ -82,12 +82,12 @@ async function createNewEmail(donation, getResponseFromNodeMailer){
           // console.log("Error " + err);
           reject(err)
           // return `${donation} failed to send`
-          getResponseFromNodeMailer(err)
+          sendResponseFromNodeMailerToClient(err)
 
         } else {
           console.log("Email sent successfully");
           // console.log(data.response)
-          getResponseFromNodeMailer(data.response)
+          sendResponseFromNodeMailerToClient(data)
           resolve(data.response)
 
           // return `${donation} was successfully sent`
