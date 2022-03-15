@@ -16,7 +16,7 @@ import { rejects } from 'assert';
 
 
 
-async function createNewEmail(donation){
+async function createNewEmail(donation, getResponseFromNodeMailer){
 
 
   dotenv.config({path: "../.env"});
@@ -39,8 +39,8 @@ async function createNewEmail(donation){
 
 
   const __dirname = path.resolve();
-
-  const sendMail = async () => {
+ 
+  const sendEmail = async () => {
     
     let response = await 
   
@@ -82,13 +82,15 @@ async function createNewEmail(donation){
       
       transporter.sendMail(mailOptions, function(err, data) {
         if (err) {
-          console.log("Error " + err);
+          // console.log("Error " + err);
           reject(err)
           // return `${donation} failed to send`
+          getResponseFromNodeMailer(err)
 
         } else {
           console.log("Email sent successfully");
-          console.log(data.response)
+          // console.log(data.response)
+          getResponseFromNodeMailer(data.response)
           resolve(data.response)
 
           // return `${donation} was successfully sent`

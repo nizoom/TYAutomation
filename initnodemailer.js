@@ -1,6 +1,6 @@
 import createNewEmail from './emails/nodemailer.js'
 
-async function initNodeMailer(donations) {
+async function initNodeMailer(donations, getResponseFromNodeMailer) {
 
     console.log(donations.length)
 
@@ -16,7 +16,7 @@ async function initNodeMailer(donations) {
 
             setTimeout( async () => {
 
-                const emailStatus = await createNewEmail(donation) //maybe add .thens to it
+                const emailStatus = await createNewEmail(donation, getResponseFromNodeMailer) //maybe add .thens to it
 
                 console.log(emailStatus);
 
