@@ -40,7 +40,7 @@ async function createNewEmail(donation){
 
   const __dirname = path.resolve();
 
-  sendMail = async () => {
+  const sendMail = async () => {
     
     let response = await 
   
