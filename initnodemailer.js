@@ -25,6 +25,9 @@ async function initNodeMailer(donations) {
     }))
 
     //store results 
+    console.log(mailResults);
+    
+    return mailResults;
 }
 
 

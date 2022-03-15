@@ -66,12 +66,12 @@ app.use("/login", bodyParser.json(), urlencodedParser, function(req, res){
 
 // SUBMIT ENDPOINT AND FUNCTION FOR TEMPLATE BUILDER UI
 
-app.use("/submitemail", bodyParser.json(), urlencodedParser,function(req, res){
+app.use("/submitemail", bodyParser.json(), urlencodedParser, async function(req, res){
   console.log('attempting to send email');
   console.log(req.body.emailObj);
 
   const arrOfEmailObjs = req.body.emailObj;
-  initNodeMailer(arrOfEmailObjs)
+  const results = await initNodeMailer(arrOfEmailObjs)
 
 })
 
