@@ -77,6 +77,7 @@ app.use("/submitemail", bodyParser.json(), urlencodedParser, async function(req,
   function sendResponseFromNodeMailerToClient(dataForResponse){
     console.log('fired')
     console.log(typeof dataForResponse) 
+    console.log(dataForResponse);
     // res.send()
   }
 
