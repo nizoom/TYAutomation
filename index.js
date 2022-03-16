@@ -93,7 +93,9 @@ app.use("/submitemail", bodyParser.json(), urlencodedParser, async function(req,
 
       // arr.find returns undefined if nothing meets the condition
 
-      if(result !== undefined){
+     console.log(results);
+
+      if(results !== undefined){
         res.send({results: false})
       } else {
         res.send({results : true})
