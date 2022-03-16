@@ -74,23 +74,42 @@ app.use("/submitemail", bodyParser.json(), urlencodedParser, async function(req,
 
   initNodeMailer(arrOfEmailObjs, sendResponseFromNodeMailerToClient)
 
+  let nodeMailerResultsTracker = [];
+
   function sendResponseFromNodeMailerToClient(dataForResponse){
     console.log('fired')
-    console.log(typeof dataForResponse) 
+
     console.log(dataForResponse);
-    const responseMsg = dataForResponse.response
-    if(responseMsg.includes('250')){
-      res.send({result : true})
-      return
-    } 
-    if(!responseMsg.response('250') || dataForResponse.rejected.length > 0){
-      res.send({result : false})
-      return
-    } else {
-      res.send({result: false})
-      return
+
+    // when there is an honoree email there will be TWO outgoing emails -> so TWO responses from nodemailer should be expected
+
+    // therefore we have to wait to res until both responses can be checked 
+
+    nodeMailerResultsTracker.push(dataForResponse)
+
+    if(nodeMailerResultsTracker.length === arrOfEmailObjs.length){
+      
+      const results = nodeMailerResultsTracker.find(obj => checkForResponseObjValidity(obj)); 
+
+      // arr.find returns undefined if nothing meets the condition
+
+      if(result !== undefined){
+        res.send({results: false})
+      } else {
+        res.send({results : true})
+      }
     }
-    // res.send()
+
+    function checkForResponseObjValidity(obj){
+      if(!obj.response.includes('250')){ // valid response should include this str 
+        return true
+      }
+      if(obj.rejected.length > 0){ // valid response should not have rejections
+        return true
+      }
+      
+    }
+
   }
 
   
