@@ -53,7 +53,7 @@ async function createNewEmail(donation, sendResponseFromNodeMailerToClient){
 
     let mailOptions = {
 
-      from: 'cohen@commonthreadsproject.org', //ThankYouFromCTP@outlook.com' ALL TESTING USE THIS EMAIL 
+      from: 'cohen@commonthreadsproject.org', //
       to: donation.TYToEmailAddress,//['info@commonthreadsproject.org', donation.TYToEmailAddress],  //['cohen@commonthreadsproject.org'],//'cohen@commonthreadsproject.org'], 
       bcc : '',//['nissimram1812@gmail.com'],//, 'info@commonthreadsproject.org'],
       subject: donation.emailSubject,

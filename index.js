@@ -78,6 +78,18 @@ app.use("/submitemail", bodyParser.json(), urlencodedParser, async function(req,
     console.log('fired')
     console.log(typeof dataForResponse) 
     console.log(dataForResponse);
+    const responseMsg = dataForResponse.response
+    if(responseMsg.includes('250')){
+      res.send({result : true})
+      return
+    } 
+    if(!responseMsg.response('250') || dataForResponse.rejected.length > 0){
+      res.send({result : false})
+      return
+    } else {
+      res.send({result: false})
+      return
+    }
     // res.send()
   }
 
