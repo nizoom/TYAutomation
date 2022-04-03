@@ -147,10 +147,11 @@ app.use("/index", async function(req, res) {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 
+
 async function automateThankYous(){
 
 
-       console.log('fired')
+       console.log('Beginning automation process')
    
        //1. get current date 
 
@@ -160,7 +161,7 @@ async function automateThankYous(){
        //2. query donorbox for all donations since yesterday at 5:30 PM 
    
        const todaysDonations = await initDonationSearch(yesterday, tomorrow); 
-    
+ 
        //3. if any donations occured yesterday before 5:30 then they will not be counted (since they were accounted for yesterday) 
    
        const newDonations = await checkForNewDonations(todaysDonations, currentTime); 
@@ -170,7 +171,7 @@ async function automateThankYous(){
    
        if(newDonations < 1){
 
-           console.log('no donations since last check')
+           console.log('no donations since last check yesterday at 5:30')
    
            return;
    
@@ -180,16 +181,19 @@ async function automateThankYous(){
    
        const donationInfo = await collectDonationInfo(newDonations);
 
-
+       
        //4.5 filter our subsequent monthly donations after the first one. If it is the first, then it gets a unique template 
    
        const donotationsWithOutMonthlies = await checkForSubsequentMonthlies(donationInfo, currentTime);
 
-   
-
+     
+       
+      //  console.log(donotationsWithOutMonthlies)
        if(donotationsWithOutMonthlies.length < 1){
 
         console.log('All new donations were recurring monthlies which do not require an email')
+        console.log('These donations include :')
+        console.log(donationInfo)
 
        }
 
@@ -213,12 +217,7 @@ async function automateThankYous(){
    
 
          // get a visual 
-
-         donationsInfoWithTemplateLanguage.forEach(( donation, index) => {
-            console.log(index)
-            console.log(donation)
-        })
-       
+  
         //   8. pass array of donaitonInfo objects to nodemailer file for sending 
 
   
