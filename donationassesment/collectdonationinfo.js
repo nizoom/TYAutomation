@@ -36,8 +36,7 @@ async function collectDonationInfo(donations){
             //save a trimmed version of donation amount when need (when there is no cents)
             const formattedAmount = (decimalAmount !== '.0' )? unformattedDonation : unformattedDonation.substring(0, decimalIndex)
 
-            // console.log(donation.donation_date)
-            const formattedDonationDate = formatDate(donation.donation_date);
+     
 
             const emailDataObj = {
                 newDonorStatus : newDonorStatus,
@@ -46,10 +45,10 @@ async function collectDonationInfo(donations){
                 lastName : donation.donor.last_name,
                 TYToEmailAddress: donation.donor.email,
                 donationAmount : formattedAmount,
-                donationDate : formattedDonationDate,
+                donationDate : donation.donation_date,
                 donorID : donation.donor.id,
                 taxParagaph : `Please let this note serve as your receipt for a fully tax-deductible contribution of $${formattedAmount} 
-                to Common Threads Project on ${formattedDonationDate}.   No goods or services were provided in exchange for this contribution. Common Threads Project is an 
+                to Common Threads Project on ${donation.donation_date}.   No goods or services were provided in exchange for this contribution. Common Threads Project is an 
                 exempt organization as described in Section 501(c)(3) of the Internal Revenue Code; EIN: 81-4212971.` 
 
             }
@@ -62,47 +61,46 @@ async function collectDonationInfo(donations){
 }
 
 
-
-
-
-function formatDate(utcTime, name){
-    console.log(name)
-    console.log(utcTime)
-  
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October', 'November', 'December']
-    
-
-    //isolate month number between the two dashes in utcTime
-
-    let dashIndexes = []
-    
-    for(let i = 0; i < utcTime.length; i++){
-      if(utcTime[i] === '-'){
-        dashIndexes.push(i)
-      }
-    }
-   
-    //use dash positions to isolate month and day numbers
-  
-    const monthNum = parseInt(utcTime.substring(dashIndexes[0] + 1,dashIndexes[1]))
-    
-    const dayNum = parseInt(utcTime.substring(dashIndexes[1] + 1, dashIndexes[1] + 3))
-    
-    const year = parseInt(utcTime.substring(0,4))
-    
-
-    //combine into finalStr 
-    
-    //indexes start at 0 and months start at 1 so you have to subtract 1 from the index
-    
-    const finalStr = `${months[monthNum - 1]} ${dayNum}, ${year}`
-    
-    console.log(finalStr)
-    
-    return finalStr
-  
-}
-
-
-
 export default collectDonationInfo
+
+
+// function formatDate(utcTime){
+   
+//     // console.log(utcTime)
+  
+//     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October', 'November', 'December']
+    
+
+//     //isolate month number between the two dashes in utcTime
+
+//     let dashIndexes = []
+    
+//     for(let i = 0; i < utcTime.length; i++){
+//       if(utcTime[i] === '-'){
+//         dashIndexes.push(i)
+//       }
+//     }
+   
+//     //use dash positions to isolate month and day numbers
+  
+//     const monthNum = parseInt(utcTime.substring(dashIndexes[0] + 1,dashIndexes[1]))
+    
+//     const dayNum = parseInt(utcTime.substring(dashIndexes[1] + 1, dashIndexes[1] + 3))
+    
+//     const year = parseInt(utcTime.substring(0,4))
+    
+
+//     //combine into finalStr 
+    
+//     //indexes start at 0 and months start at 1 so you have to subtract 1 from the index
+    
+//     const finalStr = `${months[monthNum - 1]} ${dayNum}, ${year}`
+    
+//     // console.log(finalStr)
+    
+//     return finalStr
+  
+// }
+
+
+
