@@ -13,11 +13,12 @@ async function initDonationSearch(yesterday, tomorrow){
     //${yesterday}&date_to=${today} remember date_to includes everything until thay day 
     //to do a search from yesterday at 5pm to today at 5pm you need date_from = yeseterday & date_to = tomorrow 
     //YYYY-mm-dd format for below
+
   
     async function getTodaysDonations(yesterday, tomorrow){
 
         try {
-            const result = await fetch (`https://donorbox.org/api/v1/donations?date_from=${yesterday}&date_to=${tomorrow}`, { //double check to see if this is actually picking up new donations from today
+            const result = await fetch (`https://donorbox.org/api/v1/donations?date_from=${'2022-04-07'}&date_to=${'2022-04-08'}`, { //double check to see if this is actually picking up new donations from today
                 headers: {
                     'Authorization': 'Basic ' + Buffer.from(`${username}:${key}`).toString('base64'),
                     'X-Result-Count': 100000000

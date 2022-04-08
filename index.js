@@ -36,7 +36,7 @@ const app = express();
 
 app.use(cors());
 
-// use the express-static middleware
+use the express-static middleware
 app.use(express.static("public"))
 
 // // define the first route
@@ -147,6 +147,7 @@ app.use("/index", async function(req, res) {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 
+// automateThankYous();
 
 async function automateThankYous(){
 
@@ -164,12 +165,12 @@ async function automateThankYous(){
  
        //3. if any donations occured yesterday before 5:30 then they will not be counted (since they were accounted for yesterday) 
    
-       const newDonations = await checkForNewDonations(todaysDonations, currentTime); 
+      //  const newDonations = await checkForNewDonations(todaysDonations, currentTime); 
 
 
        //3.5. if there are no new donations, then end the program 
    
-       if(newDonations < 1){
+       if(todaysDonations < 1){
 
            console.log('no donations since last check yesterday at 5:30')
    
@@ -179,7 +180,7 @@ async function automateThankYous(){
    
        //4. use donor ID from from each donation so that we can see what type of donor they are. This step also strips down the donation object to the important properties only.
    
-       const donationInfo = await collectDonationInfo(newDonations);
+       const donationInfo = await collectDonationInfo(todaysDonations)//collectDonationInfo(newDonations);
 
        
        //4.5 filter our subsequent monthly donations after the first one. If it is the first, then it gets a unique template 
@@ -217,6 +218,11 @@ async function automateThankYous(){
    
 
          // get a visual 
+
+         donationsInfoWithTemplateLanguage.forEach(emailObj => {
+           console.log(donationsInfoWithTemplateLanguage.indexOf(emailObj))
+           console.log(emailObj)
+         })
   
         //   8. pass array of donaitonInfo objects to nodemailer file for sending 
 

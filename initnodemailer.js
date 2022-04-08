@@ -30,7 +30,7 @@ async function initNodeMailer(donations, sendResponseFromNodeMailerToClient) {
     }))
 
     //store results 
-    console.log(mailResults)
+ 
     return mailResults;
 }
 
