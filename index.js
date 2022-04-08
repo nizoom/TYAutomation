@@ -36,7 +36,7 @@ const app = express();
 
 app.use(cors());
 
-use the express-static middleware
+// use the express-static middleware
 app.use(express.static("public"))
 
 // // define the first route
