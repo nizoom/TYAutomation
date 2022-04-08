@@ -34,7 +34,7 @@ async function collectDonationInfo(donations){
             //else (if has cents then keep it)
 
             //save a trimmed version of donation amount when need (when there is no cents)
-            const donationStr = (decimalAmount !== '.0' )? unformattedDonation : unformattedDonation.substring(0, decimalIndex)
+            const formattedAmount = (decimalAmount !== '.0' )? unformattedDonation : unformattedDonation.substring(0, decimalIndex)
 
             // console.log(donation.donation_date)
             const formattedDonationDate = formatDate(donation.donation_date);
@@ -45,11 +45,11 @@ async function collectDonationInfo(donations){
                 firstName : donation.donor.first_name, 
                 lastName : donation.donor.last_name,
                 TYToEmailAddress: donation.donor.email,
-                donationAmount : donationStr,
+                donationAmount : formattedAmount,
                 donationDate : formattedDonationDate,
                 donorID : donation.donor.id,
-                taxParagaph : `Please let this note serve as your receipt for a fully tax-deductible contribution of  ${donationStr} 
-                to Common Threads Project on ${formattedDonationDate}   No goods or services were provided in exchange for this contribution. Common Threads Project is an 
+                taxParagaph : `Please let this note serve as your receipt for a fully tax-deductible contribution of $${formattedAmount} 
+                to Common Threads Project on ${formattedDonationDate}.   No goods or services were provided in exchange for this contribution. Common Threads Project is an 
                 exempt organization as described in Section 501(c)(3) of the Internal Revenue Code; EIN: 81-4212971.` 
 
             }
