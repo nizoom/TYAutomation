@@ -23,6 +23,8 @@ import initNodeMailer from './initnodemailer.js';
 
 import assessLoginAttempt from './templatebuilderfuncs/assesslogin.js';
 
+import updateDB from './neon/neonhome.js';
+
 
 import generateNeonDonationList from './neon/genneondonationlist.js';
 
@@ -235,10 +237,14 @@ async function automateThankYous(){
 
         // 9 or 7 potentially 
 
-        console.log(donationsInfoWithTemplateLanguage);
+       
 
-       const donationListForNeonProcess =  generateNeonDonationList(todaysDonations, donationsInfoWithTemplateLanguage)
+        const donationListForNeonProcess =  generateNeonDonationList(todaysDonations, donationsInfoWithTemplateLanguage)
+
+        // 10. Begin Neon CRM updating process
+
+        updateDB(donationListForNeonProcess)
         
-}
+} 
 
 
