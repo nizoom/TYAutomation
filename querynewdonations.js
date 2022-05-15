@@ -18,7 +18,7 @@ async function initDonationSearch(yesterday, tomorrow){
     async function getTodaysDonations(yesterday, tomorrow){
 
         try {
-            const result = await fetch (`https://donorbox.org/api/v1/donations?date_from=${yesterday}&date_to=${tomorrow}`, { //double check to see if this is actually picking up new donations from today
+            const result = await fetch (`https://donorbox.org/api/v1/donations?date_from=${'2022-04-01'}&date_to=${tomorrow}`, { //double check to see if this is actually picking up new donations from today
                 headers: {
                     'Authorization': 'Basic ' + Buffer.from(`${username}:${key}`).toString('base64'),
                     'X-Result-Count': 100000000

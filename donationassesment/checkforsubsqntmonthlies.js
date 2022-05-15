@@ -21,13 +21,13 @@ async function checkForSubsequentMonthlies(donations, currentTime){
 
                 const processedDonation = await callback(arrOfDonations[index])
 
-                if(processedDonation !== undefined){ // undefined monthly donations are ones that came after the first -> so they are ignored 
+                if(processedDonation !== undefined){ // undefined monthly donations are ones that came after the first instance of monthly giving -> so they are ignored 
 
                     filteredDonations.push(processedDonation)
 
                 }
 
-                timeout(1000 * index)
+                timeout(2000 * index)
   
         }
     
@@ -39,7 +39,8 @@ async function checkForSubsequentMonthlies(donations, currentTime){
     async function determineMonthlyDonationStatus(donation){
    
         const planCheck = await donorPlanStatus(donation.donorID)
-      
+        
+        // console.log(planCheck)
         
         if(planCheck.length > 0 && planCheck[0].status !== 'cancelled'){ //comes from an ACTIVE monthly donor 
 

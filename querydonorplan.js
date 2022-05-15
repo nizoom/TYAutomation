@@ -29,8 +29,8 @@ async function donorPlanStatus(donorID){
             return result;
         
         } catch (error) {
-            console.log('ERROR')
-            console.dir(error)
+            console.log('ERRORZ')
+            console.dir(error.message)
         }
 
     }

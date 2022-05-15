@@ -23,6 +23,9 @@ import initNodeMailer from './initnodemailer.js';
 
 import assessLoginAttempt from './templatebuilderfuncs/assesslogin.js';
 
+
+import generateNeonDonationList from './neon/genneondonationlist.js';
+
 import "dotenv/config.js";
 
 import cors from 'cors'
@@ -39,10 +42,10 @@ app.use(cors());
 // use the express-static middleware
 app.use(express.static("public"))
 
-// // define the first route
-app.get("/", function (req, res) {
-  res.send("<h1>Welcome</h1>")
-})
+// // // define the first route
+// app.get("/", function (req, res) {
+//   res.send("<h1>Welcome</h1>")
+// })
 
 // start the server listening for requests
 // app.listen(process.env.PORT || 3000, 
@@ -51,103 +54,103 @@ app.get("/", function (req, res) {
 
 // LOGIN ENDPOINT + FUNC FOR TEMPLATE BUILDER UI
 
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
+// const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-app.use("/login", bodyParser.json(), urlencodedParser, function(req, res){
-  console.log('attempting login');
-  const pwAttempt = req.body.pwAttempt;
-  const loginResult = assessLoginAttempt(pwAttempt)
-  if(loginResult){
-    res.send({result : true})
-  } else {
-    res.send({result : false})
-  }
-})
+// app.use("/login", bodyParser.json(), urlencodedParser, function(req, res){
+//   console.log('attempting login');
+//   const pwAttempt = req.body.pwAttempt;
+//   const loginResult = assessLoginAttempt(pwAttempt)
+//   if(loginResult){
+//     res.send({result : true})
+//   } else {
+//     res.send({result : false})
+//   }
+// })
 
-// SUBMIT ENDPOINT AND FUNCTION FOR TEMPLATE BUILDER UI
+// // SUBMIT ENDPOINT AND FUNCTION FOR TEMPLATE BUILDER UI
 
-app.use("/submitemail", bodyParser.json(), urlencodedParser, async function(req, res){
-  console.log('attempting to send email');
-  console.log(req.body.emailObj);
+// app.use("/submitemail", bodyParser.json(), urlencodedParser, async function(req, res){
+//   console.log('attempting to send email');
+//   console.log(req.body.emailObj);
 
-  const arrOfEmailObjs = req.body.emailObj;
+//   const arrOfEmailObjs = req.body.emailObj;
 
-  initNodeMailer(arrOfEmailObjs, sendResponseFromNodeMailerToClient)
+//   initNodeMailer(arrOfEmailObjs, sendResponseFromNodeMailerToClient)
 
-  let nodeMailerResultsTracker = [];
+//   let nodeMailerResultsTracker = [];
 
-  function sendResponseFromNodeMailerToClient(dataForResponse){
-    console.log('fired')
+//   function sendResponseFromNodeMailerToClient(dataForResponse){
+//     console.log('fired')
 
-    console.log(dataForResponse);
+//     console.log(dataForResponse);
 
-    // when there is an honoree email there will be TWO outgoing emails -> so TWO responses from nodemailer should be expected
+//     // when there is an honoree email there will be TWO outgoing emails -> so TWO responses from nodemailer should be expected
 
-    // therefore we have to wait to res until both responses can be checked 
+//     // therefore we have to wait to res until both responses can be checked 
 
-    nodeMailerResultsTracker.push(dataForResponse)
+//     nodeMailerResultsTracker.push(dataForResponse)
 
-    if(nodeMailerResultsTracker.length === arrOfEmailObjs.length){
+//     if(nodeMailerResultsTracker.length === arrOfEmailObjs.length){
       
-      const results = nodeMailerResultsTracker.find(obj => checkForResponseObjValidity(obj)); 
+//       const results = nodeMailerResultsTracker.find(obj => checkForResponseObjValidity(obj)); 
 
-      // arr.find returns undefined if nothing meets the condition
+//       // arr.find returns undefined if nothing meets the condition
 
-     console.log(results);
+//      console.log(results);
 
-      if(results !== undefined){
-        res.send({results: false})
-      } else {
-        res.send({results : true})
-      }
-    }
+//       if(results !== undefined){
+//         res.send({results: false})
+//       } else {
+//         res.send({results : true})
+//       }
+//     }
 
-    function checkForResponseObjValidity(obj){
-      if(!obj.response.includes('250')){ // valid response should include this str 
-        return true
-      }
-      if(obj.rejected.length > 0){ // valid response should not have rejections
-        return true
-      }
+//     function checkForResponseObjValidity(obj){
+//       if(!obj.response.includes('250')){ // valid response should include this str 
+//         return true
+//       }
+//       if(obj.rejected.length > 0){ // valid response should not have rejections
+//         return true
+//       }
       
-    }
+//     }
 
-  }
+//   }
 
   
 
-})
+// })
 
 
-// AUTOMATION 
+// // CODE FOR AUTOMATION PROCESS BELOW
 
-const requiredHeader = process.env.REQUIRED_HEADER;
+// const requiredHeader = process.env.REQUIRED_HEADER;
 
 
-app.use("/index", async function(req, res) {
-    try {
+// app.use("/index", async function(req, res) {
+//     try {
 
-        if(req.headers.requester === requiredHeader){
-          const status = await automateThankYous();
-          res.json({
-            status: 200,
-            message: 'Connection succesful. Checking for new donations. If there is a valid donation you will be CCd in the TY email.'
-          });
-        } else {
-          res.status(403).send("Access denied. Requested from invalid source")
-        }
+//         if(req.headers.requester === requiredHeader){
+//           const status = await automateThankYous();
+//           res.json({
+//             status: 200,
+//             message: 'Connection succesful. Checking for new donations. If there is a valid donation you will be CCd in the TY email.'
+//           });
+//         } else {
+//           res.status(403).send("Access denied. Requested from invalid source")
+//         }
     
-      } catch (error) {
-        console.error(error);
-        return res.status(500).send("Connection unsuccessful. Server error");
-      }
+//       } catch (error) {
+//         console.error(error);
+//         return res.status(500).send("Connection unsuccessful. Server error");
+//       }
 
-});
+// });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 
-// automateThankYous();
+automateThankYous();
 
 async function automateThankYous(){
 
@@ -170,7 +173,7 @@ async function automateThankYous(){
 
        //3.5. if there are no new donations, then end the program 
    
-       if(newDonations < 1){
+       if(todaysDonations < 1){
 
            console.log('no donations since last check yesterday at 5:30')
    
@@ -180,7 +183,7 @@ async function automateThankYous(){
    
        //4. use donor ID from from each donation so that we can see what type of donor they are. This step also strips down the donation object to the important properties only.
    
-       const donationInfo = await collectDonationInfo(newDonations);
+       const donationInfo = await collectDonationInfo(todaysDonations);
 
        
        //4.5 filter our subsequent monthly donations after the first one. If it is the first, then it gets a unique template 
@@ -219,18 +222,22 @@ async function automateThankYous(){
 
          // get a visual 
 
-         donationsInfoWithTemplateLanguage.forEach(emailObj => {
-           console.log(donationsInfoWithTemplateLanguage.indexOf(emailObj))
-           console.log(emailObj)
-         })
+        //  donationsInfoWithTemplateLanguage.forEach(emailObj => {
+        //    console.log(donationsInfoWithTemplateLanguage.indexOf(emailObj))
+        //    console.log(emailObj)
+        //  })
   
         //   8. pass array of donaitonInfo objects to nodemailer file for sending 
 
   
-         const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage);
+        //  const sendResults = await initNodeMailer(donationsInfoWithTemplateLanguage);
 
 
-        // initNodeMailer([{templateName : 'newdonor'}])
+        // 9 or 7 potentially 
+
+        console.log(donationsInfoWithTemplateLanguage);
+
+       const donationListForNeonProcess =  generateNeonDonationList(todaysDonations, donationsInfoWithTemplateLanguage)
         
 }
 
