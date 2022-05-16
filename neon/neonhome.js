@@ -9,6 +9,8 @@ import queryNeonAccounts from './get/getneonaccouts.js'
 import createAccountsWhereNeeded from './prep/assessforaccountcreation.js'
 
 async function updateDB(donations){
+
+    console.log('beginning Neon process')
     // 1. get donation objs from donor box 
 
     // const donorboxObjs = await initDonationSearch();
@@ -17,8 +19,6 @@ async function updateDB(donations){
  
     const neonObjs = convertToDBObject(donations);
 
-    // console.log(neonObjs)
-
     // 3. pass all donations from the day to neon account checker to see if they have existing neon accounts
 
     const donationsWithAccStatus = await queryNeonAccounts(neonObjs); 
@@ -26,9 +26,6 @@ async function updateDB(donations){
     // 4. If all already have accounts then add donation to account 
 
     const donationsWithAccID = await createAccountsWhereNeeded(donationsWithAccStatus);
-
-
-    // console.log(donationsWithAccID[3])
 
     // now that all donors for this batch have neon accounts we can add their donation to their neon account
 
