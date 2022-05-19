@@ -1,6 +1,6 @@
 function convertToDBObject(donationsForDBProcessing){
 
-    console.log(donationsForDBProcessing)
+    // console.log(donationsForDBProcessing)
 
     // where the donation objs from donorbox are stored once they are stripped down to what is relavent to neon 
 
@@ -73,6 +73,7 @@ function convertToDBObject(donationsForDBProcessing){
                 donorName : donation.donor.name,
                 amount : donation.formatted_amount,
                 date : donation.donation_date,
+                UTCTime: donation.UTCTime,
                 campaign : {
                     id :  donation.campaign.id,
                     name : donation.campaign.name,

@@ -7,6 +7,8 @@ import getDateandTime from './getdate.js';
 
 import initDonationSearch from './querynewdonations.js';
 
+import saveUTCTime from './saveUTC.js';
+
 import checkForNewDonations from './checkfornewdonations.js';
 
 import collectDonationInfo from './donationassesment/collectdonationinfo.js'
@@ -167,10 +169,16 @@ async function automateThankYous(){
        //2. query donorbox for all donations since yesterday at 5:30 PM 
    
        const todaysDonations = await initDonationSearch(yesterday, tomorrow); 
+
+      
+       //2.5 save UTC time for posting to Neon accurately at the end of the program
+
+       const todaysDonationsWithUTCTime = saveUTCTime(todaysDonations);
  
+      
        //3. if any donations occured yesterday before 5:30 then they will not be counted (since they were accounted for yesterday) 
    
-       const newDonations = await checkForNewDonations(todaysDonations, currentTime); 
+       const newDonations = await checkForNewDonations(todaysDonationsWithUTCTime, currentTime); 
 
 
        //3.5. if there are no new donations, then end the program 
@@ -232,14 +240,14 @@ async function automateThankYous(){
         //   8. pass array of donaitonInfo objects to nodemailer file for sending 
 
   
-        initNodeMailer(donationsInfoWithTemplateLanguage);
+        // initNodeMailer(donationsInfoWithTemplateLanguage);
 
 
         // 9 or 7 potentially 
 
        
 
-        const donationListForNeonProcess =  generateNeonDonationList(todaysDonations, donationsInfoWithTemplateLanguage)
+        const donationListForNeonProcess =  generateNeonDonationList(todaysDonationsWithUTCTime, donationsInfoWithTemplateLanguage)
 
         // 10. Begin Neon CRM updating process
 

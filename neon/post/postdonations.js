@@ -19,6 +19,8 @@ async function loopThroughDonationsToUpdate(donations){
           console.log("Delayed for 1 second.");
           }, 1000)
         
+        console.log(donation)
+        
         const donationForPosting = createNeonDonationObj(donation)
 
         const postedDonation = await postDonationToNeon(donationForPosting)

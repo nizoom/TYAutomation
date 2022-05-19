@@ -21,6 +21,7 @@ async function checkForNewDonations(donations, currentTime){
             console.log('noted')
             //then push to newDonations array 
             donation.donation_date = moment(donation.donation_date).utcOffset('-0500').format('ll'); 
+         
 
             newDonations.push(donation)
           

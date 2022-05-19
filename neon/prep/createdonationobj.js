@@ -1,5 +1,3 @@
-import moment from "moment";
-
 function createNeonDonationObj(donation){
     // format donation obj so that neon can post it 
 
@@ -23,7 +21,7 @@ function createNeonDonationObj(donation){
 
     const donationForPosting = {
      
-        'date' : moment.utc(donation.date),
+        'date' : donation.UTCTime,
         'accountId' : donation.neonAccountID,
         "amount" : removeCurrencySymbols(donation.amount),
   
