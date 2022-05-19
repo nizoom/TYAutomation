@@ -43,20 +43,20 @@ function convertToDBObject(donationsForDBProcessing){
             }
 
             function assignTenderTypeProperties(typeStr){
-                const stripeID = typeStr === 'stripe' ? donation.stripe_charge_id : ''
-                const paypalID = typeStr === 'paypal' ? donation.  paypal_transaction_id : ''
+                console.log(typeStr)
+                const stripeID = typeStr.includes('stripe') ? donation.stripe_charge_id : ''
+                const paypalID = typeStr.includes('paypal') ? donation.paypal_transaction_id : ''
                 const tenderTypeID = getTenderTypeID();
                 
                 function getTenderTypeID(){
-                    switch (typeStr) {
-                        case 'stripe' : 
-                            return '17'
-                        case 'paypal': 
-                            return '11'
-                        case 'credit_card' :
-                            return'19'
-                        default:
-                            return'1' //for physical check 
+                    if(typeStr.includes('express')){
+                        return 16
+                    } else if(typeStr.includes('stripe')){
+                        return '17'
+                    } else if(typeStr.includes('paypal')){
+                        return '11'
+                    } else {
+                        return '4'
                     }
                 }
                    
