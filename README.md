@@ -5,7 +5,7 @@ The TY Automation program was built for a non-profit organization to automate th
 The goal for this project was to take writing these emails off the plate of the organization's director in anticipation of the holiday season, 
 when gifts are most frequent. The resulting program freed up her time to dedicate attention to other parts of the organization. 
 
-## Program operation
+## Program Operation
 
 This automation program was built in NodeJS and is initiated when a Google Cloud scheduled cron job hits an endpoint on a Heroku project where the program is hosted. The program begins by querying the donation widget’s API to see if there were any donations made since the last check. If there were, the program sorts them into three categories: new donor, recurring, and a donation in honor of someone else. Each category corresponds to a specific TY email template. For example, a new donor receives an email saying something like “Welcome to the [org name] family,” whereas a recurring donor would get an email saying “thank you for continuing to support us…” Those who donated in honor of someone would generate two emails. One to the donor and the other to the honoree.
 
@@ -18,3 +18,7 @@ I set up a daily cron job to hit an endpoint on an ExpressJS app. The Express ap
 The program will then define the gifts by donor category (new, recurring, monthly, and in tribute). 
 The assessed data for each gift are passed to a corresponding email template based on the donation category. 
 These templates were built with HTML, CSS, and Handlebars. My node application then sends the filled out the email to the donor.
+
+## Installation
+
+This project was built custom for a specific non profit. Please email me at nissimram1812@gmail.com if you would like assistance in replicating some of its features.  
