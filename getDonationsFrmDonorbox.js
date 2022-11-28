@@ -2,7 +2,7 @@ import fetch from "node-fetch";
 
 import "dotenv/config.js";
 
-async function initDonationSearch(yesterday, tomorrow) {
+async function getDonationsFromDonorBox(yesterday, tomorrow) {
   const key = process.env.DONORBOX_KEY;
   const username = process.env.DONORBOX_USERNAME;
 
@@ -40,4 +40,4 @@ async function initDonationSearch(yesterday, tomorrow) {
   return todaysDonations;
 }
 
-export default initDonationSearch;
+export default getDonationsFromDonorBox;

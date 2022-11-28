@@ -1,112 +1,109 @@
-async function addCustomLanguage(donations){
+async function addCustomLanguage(donations) {
+  //there are instances in the email templates where default/static language gives way to dynamic language based on the properties of each donation
 
+  //here we will go through each donation and add properties that will plug into the dynamic parts of the template
 
-    //there are instances in the email templates where default/static language gives way to dynamic language based on the properties of each donation
+  //'in honor of' and 'honoree templates are the only ones with variable language and so they are trickier
 
-    //here we will go through each donation and add properties that will plug into the dynamic parts of the template
+  let donationsWithCustomLanguage = [];
 
-    //'in honor of' and 'honoree templates are the only ones with variable language and so they are trickier
+  donations.forEach((donation) => {
+    //if block criteria will be determined by templateName
 
-    let donationsWithCustomLanguage = []
+    //newDonor template does not need any extra language outside of what is already provided by the donation obj. Variable language is irstName, donationAmount, and donationDate
 
-    donations.forEach(donation => {
+    //recurringDonor template does not need any extra language outside of what is already provided by the donation obj. Variable language is firstName, donationAmount, and donationDate
 
-        //if block criteria will be determined by templateName
+    if (donation.templateName === "honorer") {
+      //honorer template needs firstName, honoree_name, donationAmount, donationDate
 
-        //newDonor template does not need any extra language outside of what is already provided by the donation obj. Variable language is irstName, donationAmount, and donationDate
+      const honorInfo = donation.honorStatus;
 
-        //recurringDonor template does not need any extra language outside of what is already provided by the donation obj. Variable language is firstName, donationAmount, and donationDate
+      const newDonorIntroSentence =
+        "Welcome to the Common Threads family! We are delighted that you have chosen to join our mission.";
 
-        if(donation.templateName === 'honorer') {
+      const recurringDonorIntroSentence =
+        "Thank you for continuing to be such a devoted supporter of Common Threads Project";
 
-             //honorer template needs firstName, honoree_name, donationAmount, donationDate
+      //donorbox says email field must be filled out even if they also fill out physical address
 
-            const honorInfo = donation.honorStatus
+      // const recipientDestinaiton = (honorInfo.recipient_email === '') ? honorInfo.recipient_address: honorInfo.recipient_email;
 
-            const newDonorIntroSentence = 'Welcome to the Common Threads family! We are delighted that you have chosen to join our mission.'
+      const inMemoryOfSentence = `Because you have chosen to donate in memory of ${honorInfo.honoree_name}, we will send an acknowledgement to ${honorInfo.recipient_email}. What a meaningful tribute.`;
 
-            const recurringDonorIntroSentence = 'Thank you for continuing to be such a devoted supporter of Common Threads Project'
+      const honorSentence = `Because you have chosen to honor ${honorInfo.honoree_name} with your contribution, we will send your message in an acknowledgement to them.  What a lovely tribute!`;
 
-            //donorbox says email field must be filled out even if they also fill out physical address
+      //decide which sentences are applicable
 
-            // const recipientDestinaiton = (honorInfo.recipient_email === '') ? honorInfo.recipient_address: honorInfo.recipient_email;
+      const introSentence = donation.newDonorStatus
+        ? newDonorIntroSentence
+        : recurringDonorIntroSentence;
 
-            const inMemoryOfSentence = `Because you have chosen to donate in memory of ${honorInfo.honoree_name}, we will send an acknowledgement to ${honorInfo.recipient_email}. What a meaningful tribute.`
+      const actionSentence =
+        honorInfo.dedication_type === "In honor of"
+          ? honorSentence
+          : inMemoryOfSentence;
 
-            const honorSentence = `Because you have chosen to honor ${honorInfo.honoree_name} with your contribution, we will send your message in an acknowledgement to them.  What a lovely tribute!`
+      donation.introSentence = introSentence;
 
-            
+      donation.actionSentence = actionSentence;
 
-            //decide which sentences are applicable 
+      donationsWithCustomLanguage.push(donation);
 
-            const introSentence = donation.newDonorStatus ? newDonorIntroSentence : recurringDonorIntroSentence;
+      return;
+    }
 
-            const actionSentence = (honorInfo.dedication_type === 'In honor of') ? honorSentence : inMemoryOfSentence;
+    if (donation.templateName === "honoree") {
+      // is the recipient and honoree the same person?
 
-            donation.introSentence = introSentence;
+      const honoreeSameAsRecipient =
+        donation.honoreeName === donation.recipientName ? true : false;
 
-            donation.actionSentence = actionSentence;
+      const inHonorOrInMemoryStr = honoreeSameAsRecipient
+        ? "in your honor"
+        : determineThemStr(donation.type);
 
-            donationsWithCustomLanguage.push(donation)
+      //
+      function determineThemStr(honorOrMem) {
+        return donation.type === "In honor of"
+          ? `in honor of ${donation.honoreeName}`
+          : `in memory of ${donation.honoreeName}`;
+      }
+      //honoree template needs honoree name, messageFromHonorer, honorerFirstName, honorerLastName
 
-            return;
+      const gratefulTheyChoseToStr = determineGratefulStr();
 
+      function determineGratefulStr() {
+        if (donation.type === "In honor of") {
+          return honoreeSameAsRecipient ? "honor you" : "honor them";
+        } else {
+          return "honor them";
         }
+      }
 
-        if (donation.templateName === 'honoree') {
+      // const customMessageFromDonor = (donation.messageFromHonorer !== '' ) ? `They write: ${donation.messageFromHonorer}` : '' ;
 
-            // is the recipient and honoree the same person? 
+      donation.gratefulTheyChoseToStr = gratefulTheyChoseToStr;
 
-            const honoreeSameAsRecipient = donation.honoreeName === donation.recipientName ? true : false
+      donation.inHonorOrInMemoryStr = inHonorOrInMemoryStr;
 
-            const inHonorOrInMemoryStr = honoreeSameAsRecipient ? 'in your honor' : determineThemStr(donation.type);
+      //below property may be unnecessary
 
-            // 
-            function determineThemStr(honorOrMem){
-                return (donation.type === 'In honor of' ? `in honor of ${donation.honoreeName}` : `in memory of ${donation.honoreeName}`) 
+      // donation.customMessageFromDonor = customMessageFromDonor;
 
-            }
-            //honoree template needs honoree name, messageFromHonorer, honorerFirstName, honorerLastName
+      donationsWithCustomLanguage.push(donation);
 
-            const gratefulTheyChoseToStr = determineGratefulStr();
+      return;
+    }
 
-            function determineGratefulStr(){
-               if( donation.type === 'In honor of' ) {
-                   return (honoreeSameAsRecipient ? 'honor you': 'honor them')
-               } else {
-                   return 'honor them'
-               }
-            }
+    // add all others donations to the arr as well
 
-            // const customMessageFromDonor = (donation.messageFromHonorer !== '' ) ? `They write: ${donation.messageFromHonorer}` : '' ;
+    donationsWithCustomLanguage.push(donation);
 
-            donation.gratefulTheyChoseToStr = gratefulTheyChoseToStr;
+    return;
+  });
 
-            donation.inHonorOrInMemoryStr = inHonorOrInMemoryStr;
-
-            //below property may be unnecessary 
-
-            // donation.customMessageFromDonor = customMessageFromDonor;
-
-            donationsWithCustomLanguage.push(donation)
-
-
-            return;
-                
-        } 
-
-        // add all others donations to the arr as well 
-
-        donationsWithCustomLanguage.push(donation)
-
-        return;
-         
-    })
-   
-  
-
-    return donationsWithCustomLanguage
-
+  return donationsWithCustomLanguage;
 }
 
-export default addCustomLanguage
+export default addCustomLanguage;

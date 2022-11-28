@@ -1,7 +1,7 @@
 // TY AUTOMATION AND UI SERVER MAIN FILE
 import getDateandTime from "./getdate.js";
 
-import initDonationSearch from "./querynewdonations.js";
+import initDonationSearch from "./getDonationsFrmDonorbox.js";
 
 import saveUTCTime from "./saveUTC.js";
 
