@@ -6,7 +6,7 @@ async function createAccountsWhereNeeded(donations) {
   async function wrapperForAsyncLoop() {
     const donorsWithNeonAccounts = donations.map(async (donation) => {
       if (/^\d+$/.test(donation.neonAccountID)) {
-        console.log("donor has an existing neon account");
+        // console.log("donor has an existing neon account");
         // console.log(donation)
         return donation;
       } else {

@@ -1,7 +1,7 @@
 import getDonationsFromDonorBox from "../getDonationsFrmDonorbox.js";
 import convertToDBObject from "../neon/prep/stripdonorboxobj.js";
 import queryNeonAccounts from "../neon/get/getneonaccouts.js";
-import loopThroughDonationsToUpdate from "../neon/post/postdonations";
+import loopThroughDonationsToUpdate from "../neon/post/postdonations.js";
 import createAccountsWhereNeeded from "../neon/prep/assessforaccountcreation.js";
 import saveUTCTime from "../saveUTC.js";
 
@@ -19,16 +19,16 @@ async function initForceNeon(startDate, endDate) {
     arrOfNeonObjsWithAccStatus
   );
 
-  // loopThroughDonationsToUpdate(donationsWithAccID)
+  loopThroughDonationsToUpdate([donationsWithAccID[0]]);
   // console.log(donationsWithAccID);
 }
 
-function setTYEmailStatusToNA(arrOfDonations) {
-  const setDonations = arrOfDonations.map((el, index) => {
-    el.acknolwedgementEmail = "N/A";
-    return el;
-  });
-  return setDonations;
-}
-
 initForceNeon("2022-01-07", "2022-05-08");
+
+// function setTYEmailStatusToNA(arrOfDonations) {
+//   const setDonations = arrOfDonations.map((el, index) => {
+//     el.acknolwedgementEmail = "N/A";
+//     return el;
+//   });
+//   return setDonations;
+// }

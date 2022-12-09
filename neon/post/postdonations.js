@@ -12,15 +12,15 @@ async function loopThroughDonationsToUpdate(donations) {
   );
 
   const postedDonations = donations.map(async (donation) => {
-    setTimeout(() => {
+    setTimeout(async () => {
       console.log("Delayed for 1 second.");
+
+      const donationForPosting = createNeonDonationObj(donation);
+
+      const postedDonation = await postDonationToNeon(donationForPosting);
+
+      return postedDonation;
     }, 1000);
-
-    const donationForPosting = createNeonDonationObj(donation);
-
-    const postedDonation = await postDonationToNeon(donationForPosting);
-
-    return postedDonation;
   });
 
   const allPostedDonations = await Promise.all(postedDonations);
