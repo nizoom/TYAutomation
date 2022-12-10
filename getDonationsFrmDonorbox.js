@@ -30,7 +30,7 @@ async function getDonationsFromDonorBox(yesterday, tomorrow) {
       return result;
     } catch (error) {
       console.log("ERROR");
-      console.log(error);
+      console.log(error.message);
     }
     return;
   }

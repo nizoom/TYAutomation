@@ -2,7 +2,7 @@
 
 import loopThroughDonationsToUpdate from "./post/postdonations.js";
 
-import convertToDBObject from "./prep/stripdonorboxobj.js";
+import { convertToDBObject } from "./prep/stripdonorboxobj.js";
 
 import queryNeonAccounts from "./get/getneonaccouts.js";
 

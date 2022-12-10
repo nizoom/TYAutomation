@@ -4,39 +4,35 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title> Honoree Template</title>
+        <title> Recurring Donor Template</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
         <link rel = 'stylesheet' href = 'styles.css'>
     </head>
-   
-        <body style="background-color: #D4EDF1; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 17px">
-    
-            <div>
-                <div style = 'text-align: center;' >
-                    <img style = ' border-radius: 5px;'src="https://i.ibb.co/ZNMQynR/nepalbirds.jpg" alt="nepal birds" width="50%"/>
-                </div>
-                <header style="margin: 0 20px 0 20px">
-                    <p style  = "" >  Dear {{honoreeName}},</p>
-                </header>
-
-                <section style="margin: 0 20px 0 20px">
-                
-                     <p style="padding: 5px 0 5px 0;"> This note is to let you know that {{honorerFirstName}} {{honorerLastName}} has 
-                        made a very generous donation to Common Threads Project in your honor. We are deeply grateful that 
-                        they chose to {{ acknowledgementPhrase }} in this way. We join {{honorerFirstName}} in wishing you all the best.
-                         </p>
-                         
-                     
-
-                <p> <em> {{messageFromHonorer}} </em> </p>
-
-                <p> P.S. Information on the work of Common Threads Project can be found  
-
-                    <a href="www.commonthreadsproject.org" target="_blank" rel="noopener noreferrer"> here</a>
-                </p>
-
+            
+            <body style="background-color: #D4EDF1; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 17px">
+                <div style="margin: 0 20px 0 20px">
+                    <header>
+                        <p style= "margin-top: 22px;">Dear {{firstName}},</p>
+                    </header>
+                <section style="line-height: 20px;">
+                    <p> Thank you very much for contributing ${{donationAmount}} to Common Threads Project!  We are truly grateful that you are such a loyal supporter of this work. 
+                        Together we can make a real difference in the lives of those who have been 
+                        subjected to gender based violence, war, and displacement. Because of your 
+                        generosity, girls and women in CTP circles have opportunities for healing that they urgently need 
+                        and deserve. They can move from despair to strength, and from shame to dignity to reclaim their futures. </p>
+                    <div style="display: flex;" >
+                        <img width="50%"src="https://i.ibb.co/c2wFT0f/girls.png" alt="girls working on therapeutic stitching project" border="0">
+                        <img width="50%" src="https://i.ibb.co/pv8PCpn/group.png" alt="CTP group therapy workshop in Nepal" border="0">
+                    </div>
+                    <img style="margin-top: 20px;"width="100%"src="https://i.ibb.co/R4BX27c/balloons.png" alt="participants releasing balloons" border="0">
+                 
+                    <p>The women and girls of Common Threads Project appreciate your steadfast belief in the possibility of healing. Your gift of hope makes their recovery possible.</p>
+                    <p><b>
+                        {{taxParagaph}}
+                    </b></p>
+                </section>
                 <footer>
                     <ul style = 'list-style: none; margin-left: 0; padding-left: 0'>
         
@@ -106,10 +102,8 @@
                     </ul>
         
                 </footer>
-            </section>
-
-            
-            </div>
+        
+                </div>
           
     </body>
 </html>

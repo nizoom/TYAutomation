@@ -40,7 +40,7 @@ async function createNewEmail(donation, sendResponseFromNodeMailerToClient) {
       let mailOptions = {
         from: "cohen@commonthreadsproject.org", //
         to: donation.TYToEmailAddress, //['info@commonthreadsproject.org', donation.TYToEmailAddress],['cohen@commonthreadsproject.org']
-        bcc: ["nissimram1812@gmail.com", "info@commonthreadsproject.org"],
+        bcc: ["nissimram1812@gmail.com", "info@commonthreadsproject.org"], //
         subject: donation.emailSubject,
         text: "",
         html: htmlToSend,

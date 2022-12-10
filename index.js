@@ -156,7 +156,7 @@ async function automateThankYous() {
   const [currentTime, yesterday, tomorrow] = await getDateandTime();
 
   //2. query donorbox for all donations since yesterday at 5:30 PM
-
+  // YYYY-mm-dd //yesterday
   const todaysDonations = await initDonationSearch(yesterday, tomorrow);
 
   //2.5 save UTC time for posting to Neon accurately at the end of the program

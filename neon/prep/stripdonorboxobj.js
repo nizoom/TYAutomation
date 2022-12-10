@@ -1,4 +1,4 @@
-function convertToDBObject(donationsForDBProcessing) {
+export function convertToDBObject(donationsForDBProcessing) {
   // console.log(donationsForDBProcessing)
 
   // where the donation objs from donorbox are stored once they are stripped down to what is relavent to neon
@@ -21,21 +21,6 @@ function convertToDBObject(donationsForDBProcessing) {
           ? donation.honor.recipiet_message
           : "",
       };
-    }
-
-    function getAnswerFromFormQuestionSection(extraQuestion) {
-      if (donation.questions !== undefined) {
-        const questionsSection = donation.questions;
-        let result = null;
-        questionsSection.forEach((inputFromForm) => {
-          if (inputFromForm.question.includes(extraQuestion)) {
-            result = inputFromForm.answer;
-          }
-        });
-        return result;
-      } else {
-        return false;
-      }
     }
 
     function assignTenderTypeProperties(typeStr) {
@@ -88,8 +73,12 @@ function convertToDBObject(donationsForDBProcessing) {
       source: "DonorBox",
       donationType: donation.donation_type,
       campaign: donation.campaign.name,
-      birthdayCard: getAnswerFromFormQuestionSection("birthday") ? "yes" : "no",
-      hostEvent: getAnswerFromFormQuestionSection("hosting") ? "yes" : "no",
+      birthdayCard: getAnswerFromFormQuestionSection(donation, "birthday")
+        ? "yes"
+        : "no",
+      hostEvent: getAnswerFromFormQuestionSection(donation, "hosting")
+        ? "yes"
+        : "no",
       currency: donation.currency.toUpperCase(),
       donorboBoxReceiptID: donation.id,
       donorBoxPlanID: donation.hasOwnProperty("plan_id")
@@ -111,4 +100,17 @@ function convertToDBObject(donationsForDBProcessing) {
   return neonObjs;
 }
 
-export default convertToDBObject;
+export function getAnswerFromFormQuestionSection(donation, extraQuestion) {
+  if (donation.questions !== undefined) {
+    const questionsSection = donation.questions;
+    let result = null;
+    questionsSection.forEach((inputFromForm) => {
+      if (inputFromForm.question.includes(extraQuestion)) {
+        result = inputFromForm.answer;
+      }
+    });
+    return result;
+  } else {
+    return false;
+  }
+}

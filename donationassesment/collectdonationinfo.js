@@ -1,5 +1,5 @@
 import determineDonorFrequency from "./getdonorstatus.js";
-
+import { getAnswerFromFormQuestionSection } from "../neon/prep/stripdonorboxobj.js";
 // import moment from 'moment'
 
 async function collectDonationInfo(donations) {
@@ -46,12 +46,15 @@ async function collectDonationInfo(donations) {
         taxParagaph: `Please let this note serve as your receipt for a fully tax-deductible contribution of $${formattedAmount} 
                 to Common Threads Project on ${donation.donation_date}.   No goods or services were provided in exchange for this contribution. Common Threads Project is an 
                 exempt organization as described in Section 501(c)(3) of the Internal Revenue Code; EIN: 81-4212971.`,
+        holidayCard: getAnswerFromFormQuestionSection(donation, "birthday")
+          ? true
+          : false,
       };
 
       return emailDataObj;
     })
   );
-
+  // console.log(arrOfDonationObjForEmail);
   return arrOfDonationObjForEmail;
 }
 

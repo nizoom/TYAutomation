@@ -17,7 +17,6 @@ async function checkForNewDonations(donations, currentTime) {
       donation.donation_date = moment(donation.donation_date)
         .utcOffset("-0500")
         .format("ll");
-
       newDonations.push(donation);
     } else {
       console.log(

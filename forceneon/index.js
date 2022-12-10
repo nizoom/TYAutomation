@@ -1,5 +1,5 @@
 import getDonationsFromDonorBox from "../getDonationsFrmDonorbox.js";
-import convertToDBObject from "../neon/prep/stripdonorboxobj.js";
+import { convertToDBObject } from "../neon/prep/stripdonorboxobj.js";
 import queryNeonAccounts from "../neon/get/getneonaccouts.js";
 import loopThroughDonationsToUpdate from "../neon/post/postdonations.js";
 import createAccountsWhereNeeded from "../neon/prep/assessforaccountcreation.js";
