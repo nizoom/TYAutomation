@@ -217,7 +217,7 @@ async function automateThankYous() {
   // get a visual
 
   donationsInfoWithTemplateLanguage.forEach((emailObj) => {
-    console.log("Here is a visual");
+    console.log("Here is a visual with new templates");
     console.log(donationsInfoWithTemplateLanguage.indexOf(emailObj));
     console.log(emailObj);
   });
