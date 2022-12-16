@@ -45,8 +45,8 @@ app.get("/", function (req, res) {
   res.send("<h1>Welcome</h1>");
 });
 
-// start the server listening for requests
-app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
+// start the server listening for requests, comment this line out when pushing to production
+// app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
 
 // LOGIN ENDPOINT + FUNC FOR TEMPLATE BUILDER UI
 
