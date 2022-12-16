@@ -46,8 +46,7 @@ app.get("/", function (req, res) {
 });
 
 // start the server listening for requests
-// app.listen(process.env.PORT || 3000,
-// 	() => console.log("Server is running..."));
+app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
 
 // LOGIN ENDPOINT + FUNC FOR TEMPLATE BUILDER UI
 
@@ -146,7 +145,7 @@ app.use("/index", async function (req, res) {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 
-// automateThankYous();
+automateThankYous();
 
 async function automateThankYous() {
   console.log("Beginning automation process");
@@ -224,16 +223,16 @@ async function automateThankYous() {
 
   //   8. pass array of donaitonInfo objects to nodemailer file for sending
 
-  initNodeMailer(donationsInfoWithTemplateLanguage);
+  // initNodeMailer(donationsInfoWithTemplateLanguage);
 
   // 9 or 7 potentially
 
-  const donationListForNeonProcess = generateNeonDonationList(
-    todaysDonationsWithUTCTime,
-    donationsInfoWithTemplateLanguage
-  );
+  // const donationListForNeonProcess = generateNeonDonationList(
+  //   todaysDonationsWithUTCTime,
+  //   donationsInfoWithTemplateLanguage
+  // );
 
   // 10. Begin Neon CRM updating process
 
-  updateDB(donationListForNeonProcess);
+  // updateDB(donationListForNeonProcess);
 }
