@@ -2,6 +2,7 @@ import createNewEmail from "./emails/nodemailer.js";
 
 async function initNodeMailer(donations, sendResponseFromNodeMailerToClient) {
   console.log(donations.length);
+  console.log(donations);
 
   //loop through donations and pass each obj to nodemailer
 
