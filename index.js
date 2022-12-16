@@ -223,16 +223,16 @@ async function automateThankYous() {
 
   //   8. pass array of donaitonInfo objects to nodemailer file for sending
 
-  // initNodeMailer(donationsInfoWithTemplateLanguage);
+  initNodeMailer(donationsInfoWithTemplateLanguage);
 
   // 9 or 7 potentially
 
-  // const donationListForNeonProcess = generateNeonDonationList(
-  //   todaysDonationsWithUTCTime,
-  //   donationsInfoWithTemplateLanguage
-  // );
+  const donationListForNeonProcess = generateNeonDonationList(
+    todaysDonationsWithUTCTime,
+    donationsInfoWithTemplateLanguage
+  );
 
   // 10. Begin Neon CRM updating process
 
-  // updateDB(donationListForNeonProcess);
+  updateDB(donationListForNeonProcess);
 }
