@@ -37,18 +37,18 @@ const app = express();
 
 app.use(cors());
 
-// use the express-static middleware
+// // use the express-static middleware
 app.use(express.static("public"));
 
-// // define the first route
+// // // define the first route
 app.get("/", function (req, res) {
   res.send("<h1>Welcome</h1>");
 });
 
-// start the server listening for requests, comment this line out when pushing to production
-// app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
+// // start the server listening for requests, comment this line out when pushing to production
+// // app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
 
-// LOGIN ENDPOINT + FUNC FOR TEMPLATE BUILDER UI
+// // LOGIN ENDPOINT + FUNC FOR TEMPLATE BUILDER UI
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -88,7 +88,7 @@ app.use(
 
       // therefore we have to wait to res until both responses can be checked
 
-      nodeMailerResultsTracker.push(dataForResponse);
+      //       nodeMailerResultsTracker.push(dataForResponse);
 
       if (nodeMailerResultsTracker.length === arrOfEmailObjs.length) {
         const results = nodeMailerResultsTracker.find((obj) =>

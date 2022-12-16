@@ -1,3 +1,4 @@
+import { getAnswerFromFormQuestionSection } from "../neon/prep/stripdonorboxobj.js";
 async function generateHonoreeObj(donations) {
   let donationsWithHonoreesObjects = [];
 
@@ -28,6 +29,9 @@ async function generateHonoreeObj(donations) {
 
         //add subject string for the email
         emailSubject: `${donation.firstName} ${donation.lastName} has dedicated a donation to you`,
+        holidayCard: getAnswerFromFormQuestionSection(donation, "birthday")
+          ? true
+          : false,
       });
     }
 

@@ -28,6 +28,8 @@ async function labelDonations(donoationsToBeCategorized) {
         } else {
           donation.templateName = "honoree";
         }
+        // console.log("inside label donations");
+        // console.log(donation);
         return donation;
       }
 
