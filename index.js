@@ -59,10 +59,7 @@ app.use(
     console.log(req.body.emailObj);
 
     const arrOfEmailObjs = req.body.emailObj;
-
     initNodeMailer(arrOfEmailObjs, sendResponseFromNodeMailerToClient);
-    app.use(haltOnTimedout);
-
     let nodeMailerResultsTracker = [];
 
     function sendResponseFromNodeMailerToClient(dataForResponse) {
