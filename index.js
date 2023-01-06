@@ -63,8 +63,6 @@ app.use(
     let nodeMailerResultsTracker = [];
 
     function sendResponseFromNodeMailerToClient(dataForResponse) {
-      console.log("fired");
-      console.log(dataForResponse);
       // when there is an honoree email there will be TWO outgoing emails -> so TWO responses from nodemailer should be expected
       // therefore we have to wait to res until both responses can be checked
       //       nodeMailerResultsTracker.push(dataForResponse);
@@ -77,22 +75,18 @@ app.use(
         arrOfEmailObjs.length
       );
 
-      if (nodeMailerResultsTracker.length === arrOfEmailObjs.length) {
-        const results = nodeMailerResultsTracker.find((obj) =>
-          checkForResponseObjValidity(obj)
-        );
+      const results = nodeMailerResultsTracker.find((obj) =>
+        checkForResponseObjValidity(obj)
+      );
+      // arr.find returns undefined if nothing meets the condition
+      console.log("here are the results");
+      console.log(results);
 
-        // arr.find returns undefined if nothing meets the condition
-
-        console.log("here are the results");
-        console.log(results);
-
-        if (results !== undefined) {
-          // res.send({ results: false });
-          res.sendStatus(500);
-        } else {
-          res.sendStatus(200);
-        }
+      if (results !== undefined) {
+        // res.send({ results: false });
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(200);
       }
 
       function checkForResponseObjValidity(obj) {
