@@ -80,12 +80,14 @@ app.use(
 
         // arr.find returns undefined if nothing meets the condition
 
+        console.log("here are the results");
         console.log(results);
 
         if (results !== undefined) {
-          res.send({ results: false });
+          // res.send({ results: false });
+          res.sendStatus(500);
         } else {
-          res.send({ results: true });
+          res.sendStatus(200);
         }
       }
 
