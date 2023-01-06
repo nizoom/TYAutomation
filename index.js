@@ -68,7 +68,6 @@ app.use(
     function sendResponseFromNodeMailerToClient(dataForResponse) {
       console.log("fired");
       console.log(dataForResponse);
-      app.use(haltOnTimedout);
       // when there is an honoree email there will be TWO outgoing emails -> so TWO responses from nodemailer should be expected
       // therefore we have to wait to res until both responses can be checked
       //       nodeMailerResultsTracker.push(dataForResponse);
@@ -109,6 +108,7 @@ app.use(
           return true;
         }
       }
+      app.use(haltOnTimedout);
     }
   }
 );
