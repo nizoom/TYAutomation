@@ -72,6 +72,14 @@ app.use(
       // when there is an honoree email there will be TWO outgoing emails -> so TWO responses from nodemailer should be expected
       // therefore we have to wait to res until both responses can be checked
       //       nodeMailerResultsTracker.push(dataForResponse);
+      console.log(
+        "🚀 ~ file: index.js:77 ~ sendResponseFromNodeMailerToClient ~ nodeMailerResultsTracker.length",
+        nodeMailerResultsTracker.length
+      );
+      console.log(
+        "🚀 ~ file: index.js:81 ~ sendResponseFromNodeMailerToClient ~ arrOfEmailObjs.length",
+        arrOfEmailObjs.length
+      );
 
       if (nodeMailerResultsTracker.length === arrOfEmailObjs.length) {
         const results = nodeMailerResultsTracker.find((obj) =>
