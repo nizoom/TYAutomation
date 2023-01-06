@@ -34,21 +34,21 @@ import bodyParser from "body-parser";
 import express from "express";
 
 const app = express();
-
+app.use(timeout("7s"));
 app.use(cors());
 
 // // use the express-static middleware
 app.use(express.static("public"));
 
-// // // define the first route
+// // // // define the first route
 app.get("/", function (req, res) {
   res.send("<h1>Welcome</h1>");
 });
 
-// // start the server listening for requests, comment this line out when pushing to production
-// // app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
+// // // start the server listening for requests, comment this line out when pushing to production
+// // // app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
 
-// // LOGIN ENDPOINT + FUNC FOR TEMPLATE BUILDER UI
+// // // LOGIN ENDPOINT + FUNC FOR TEMPLATE BUILDER UI
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -63,7 +63,7 @@ app.use("/login", bodyParser.json(), urlencodedParser, function (req, res) {
   }
 });
 
-// SUBMIT ENDPOINT AND FUNCTION FOR TEMPLATE BUILDER UI
+// // SUBMIT ENDPOINT AND FUNCTION FOR TEMPLATE BUILDER UI
 
 app.use(
   "/submitemail",
@@ -76,18 +76,16 @@ app.use(
     const arrOfEmailObjs = req.body.emailObj;
 
     initNodeMailer(arrOfEmailObjs, sendResponseFromNodeMailerToClient);
+    app.use(haltOnTimedout);
 
     let nodeMailerResultsTracker = [];
 
     function sendResponseFromNodeMailerToClient(dataForResponse) {
       console.log("fired");
-
       console.log(dataForResponse);
-
+      app.use(haltOnTimedout);
       // when there is an honoree email there will be TWO outgoing emails -> so TWO responses from nodemailer should be expected
-
       // therefore we have to wait to res until both responses can be checked
-
       //       nodeMailerResultsTracker.push(dataForResponse);
 
       if (nodeMailerResultsTracker.length === arrOfEmailObjs.length) {
@@ -120,7 +118,7 @@ app.use(
   }
 );
 
-// CODE FOR AUTOMATION PROCESS BELOW
+// // CODE FOR AUTOMATION PROCESS BELOW
 
 const requiredHeader = process.env.REQUIRED_HEADER;
 
