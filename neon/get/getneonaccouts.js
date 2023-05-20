@@ -5,9 +5,17 @@ import path from "path";
 async function queryNeonAccounts(donations) {
   dotenv.config({ path: "../.env" });
 
-  const username = process.env.NEON_USERNAME;
+  const username = process.env.NEON_ORG_ID;
+  // console.log(
+  //   "🚀 ~ file: getneonaccouts.js:9 ~ queryNeonAccounts ~ username:",
+  //   username
+  // );
 
   const password = process.env.NEON_API_KEY;
+  // console.log(
+  //   "🚀 ~ file: getneonaccouts.js:12 ~ queryNeonAccounts ~ password:",
+  //   password
+  // );
 
   const base64encodedData = Buffer.from(username + ":" + password).toString(
     "base64"
@@ -91,16 +99,16 @@ async function queryNeonAccounts(donations) {
       body: JSON.stringify(queryTerms),
     })
       .then((data) => {
-        // console.log(data.text())
         return data.text();
       })
       .catch((error) => {
-        console.log(error.message);
+        console.log(
+          "🚀 ~ file: getneonaccouts.js:111 ~ accountGetRequest ~ error.message:",
+          error.message
+        );
       });
 
     const parsedResultsFromFetch = JSON.parse(result);
-
-    // console.log( parsedResultsFromFetch.searchResults)
 
     return parsedResultsFromFetch.searchResults;
 

@@ -22,18 +22,18 @@ const app = express();
 app.use(timeout("7s"));
 app.use(cors());
 
-// // use the express-static middleware
+// use the express-static middleware
 app.use(express.static("public"));
 
-// // // // define the first route
+// define the first route
 app.get("/", function (req, res) {
   res.send("<h1>Welcome</h1>");
 });
 
-// // // start the server listening for requests, comment this line out when pushing to production
-// // // app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
+// start the server listening for requests, comment this line out when pushing to production
+// app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
 
-// // // LOGIN ENDPOINT + FUNC FOR TEMPLATE BUILDER UI
+// LOGIN ENDPOINT + FUNC FOR TEMPLATE BUILDER UI
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -48,7 +48,7 @@ app.use("/login", bodyParser.json(), urlencodedParser, function (req, res) {
   }
 });
 
-// // SUBMIT ENDPOINT AND FUNCTION FOR TEMPLATE BUILDER UI
+// SUBMIT ENDPOINT AND FUNCTION FOR TEMPLATE BUILDER UI
 
 app.use(
   "/submitemail",
@@ -127,8 +127,6 @@ app.use("/index", async function (req, res) {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
 
-// automateThankYous();
-
 async function automateThankYous() {
   console.log("Beginning automation process");
 
@@ -155,7 +153,6 @@ async function automateThankYous() {
 
   if (newDonations < 1) {
     console.log("no donations since last check yesterday at 5:30");
-
     return;
   }
 

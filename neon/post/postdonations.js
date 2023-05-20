@@ -3,7 +3,7 @@ import "dotenv/config";
 import createNeonDonationObj from "../prep/createdonationobj.js";
 
 async function loopThroughDonationsToUpdate(donations) {
-  const username = process.env.NEON_USERNAME;
+  const username = process.env.NEON_ORG_ID;
 
   const password = process.env.NEON_API_KEY;
 
@@ -18,14 +18,15 @@ async function loopThroughDonationsToUpdate(donations) {
       const donationForPosting = createNeonDonationObj(donation);
 
       const postedDonation = await postDonationToNeon(donationForPosting);
-
+      console.log(
+        "🚀 ~ file: postdonations.js:33 ~ loopThroughDonationsToUpdate ~ allPostedDonations:",
+        postedDonation
+      );
       return postedDonation;
     }, 1000);
   });
 
   const allPostedDonations = await Promise.all(postedDonations);
-
-  console.log(allPostedDonations);
 
   async function postDonationToNeon(donationForPosting) {
     const url = "https://api.neoncrm.com/v2/donations";
