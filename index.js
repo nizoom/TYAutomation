@@ -151,7 +151,7 @@ async function automateThankYous() {
     currentTime
   );
 
-  //3.5. if there are no new donations, then end the program
+  //3.5. if there are no new donations, then end the program.
 
   if (newDonations < 1) {
     console.log("no donations since last check yesterday at 5:30");
