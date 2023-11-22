@@ -11,6 +11,7 @@ async function getDonationsFromDonorBox(yesterday, tomorrow) {
   //YYYY-mm-dd format for below
 
   async function getTodaysDonations(yesterday, tomorrow) {
+    // const customStartDate = "2023-11-20";
     try {
       const result = await fetch(
         `https://donorbox.org/api/v1/donations?date_from=${yesterday}&date_to=${tomorrow}`,
