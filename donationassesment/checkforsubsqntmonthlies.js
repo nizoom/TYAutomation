@@ -22,7 +22,7 @@ async function checkForSubsequentMonthlies(donations, currentTime) {
         filteredDonations.push(processedDonation);
       }
 
-      timeout(2000 * index);
+      await timeout(10000);
     }
 
     return filteredDonations;

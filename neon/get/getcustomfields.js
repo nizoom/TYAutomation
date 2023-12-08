@@ -23,13 +23,17 @@ async function getCustomFields() {
     },
   })
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       return data.text();
     })
     .catch((error) => {
       console.log(error.message);
     });
   const parsedResultsFromFetch = JSON.parse(result);
+  console.log(
+    "🚀 ~ file: getcustomfields.js:33 ~ getCustomFields ~ parsedResultsFromFetch:",
+    parsedResultsFromFetch
+  );
 }
 
 getCustomFields();

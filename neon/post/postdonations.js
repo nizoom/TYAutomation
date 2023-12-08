@@ -11,20 +11,22 @@ async function loopThroughDonationsToUpdate(donations) {
     "base64"
   );
 
-  const postedDonations = donations.map(async (donation) => {
-    setTimeout(async () => {
-      console.log("Delayed for 1 second.");
+  const postedDonations = [];
+  for (const donation of donations) {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log("Delayed for 1 second.");
 
-      const donationForPosting = createNeonDonationObj(donation);
+    const donationForPosting = createNeonDonationObj(donation);
 
-      const postedDonation = await postDonationToNeon(donationForPosting);
-      console.log(
-        "🚀 ~ file: postdonations.js:33 ~ loopThroughDonationsToUpdate ~ allPostedDonations:",
-        postedDonation
-      );
-      return postedDonation;
-    }, 1000);
-  });
+    const postedDonation = await postDonationToNeon(donationForPosting);
+    console.log("next donation (local): " + donation);
+    console.log(
+      "🚀 ~ file: postdonations.js:33 ~ loopThroughDonationsToUpdate ~ allPostedDonations:",
+      postedDonation
+    );
+
+    postedDonations.push(postedDonation);
+  }
 
   const allPostedDonations = await Promise.all(postedDonations);
 
@@ -44,6 +46,7 @@ async function loopThroughDonationsToUpdate(donations) {
       .then((data) => {
         //in case one fails the accountID will be saved so we can see which one failed
         data.accountID = donationForPosting.accountId;
+        console.log(data);
         return data;
       });
 

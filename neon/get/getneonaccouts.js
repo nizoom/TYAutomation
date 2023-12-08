@@ -6,16 +6,8 @@ async function queryNeonAccounts(donations) {
   dotenv.config({ path: "../.env" });
 
   const username = process.env.NEON_ORG_ID;
-  // console.log(
-  //   "🚀 ~ file: getneonaccouts.js:9 ~ queryNeonAccounts ~ username:",
-  //   username
-  // );
 
   const password = process.env.NEON_API_KEY;
-  // console.log(
-  //   "🚀 ~ file: getneonaccouts.js:12 ~ queryNeonAccounts ~ password:",
-  //   password
-  // );
 
   const base64encodedData = Buffer.from(username + ":" + password).toString(
     "base64"

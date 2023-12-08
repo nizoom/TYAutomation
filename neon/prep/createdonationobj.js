@@ -34,6 +34,12 @@ function createNeonDonationObj(donation) {
 
     donationCustomFields: [
       {
+        id: "157",
+        value: donation.acknowledgementEmailSent,
+        name: "Acknowledgement Email Sent",
+        // status: "ACTIVE",
+      },
+      {
         id: "115",
         value: donation.donationType,
         name: "Donation Type",
@@ -139,7 +145,6 @@ function createNeonDonationObj(donation) {
       },
     ],
   };
-
   return donationForPosting;
 }
 

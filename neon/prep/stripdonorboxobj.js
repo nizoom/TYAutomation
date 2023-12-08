@@ -85,6 +85,7 @@ export function convertToDBObject(donationsForDBProcessing) {
         ? donation.plan_id
         : "",
       recurringDonation: donation.recurring,
+      acknowledgementEmailSent: donation.acknolwedgementEmail,
 
       // tender:  stripe, credit card, paypal majority from db are stripe or pay pal
 
