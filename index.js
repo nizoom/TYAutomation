@@ -102,7 +102,7 @@ app.use(
   }
 );
 
-// // CODE FOR AUTOMATION PROCESS BELOW
+// CODE FOR AUTOMATION PROCESS BELOW
 
 const requiredHeader = process.env.REQUIRED_HEADER;
 
@@ -110,13 +110,15 @@ app.use("/index", async function (req, res) {
   try {
     if (req.headers.requester === requiredHeader) {
       const status = await automateThankYous();
-      res.json({
+      return res.json({
         status: 200,
         message:
           "Connection succesful. Checking for new donations. If there is a valid donation you will be CCd in the TY email.",
       });
     } else {
-      res.status(403).send("Access denied. Requested from invalid source");
+      return res
+        .status(403)
+        .send("Access denied. Requested from invalid source");
     }
   } catch (error) {
     console.error(error);
@@ -208,12 +210,12 @@ async function automateThankYous() {
 
   // 9 or 7 potentially
 
-  const donationListForNeonProcess = generateNeonDonationList(
-    todaysDonationsWithUTCTime,
-    donationsInfoWithTemplateLanguage
-  );
+  // const donationListForNeonProcess = generateNeonDonationList(
+  //   todaysDonationsWithUTCTime,
+  //   donationsInfoWithTemplateLanguage
+  // );
 
   // 10. Begin Neon CRM updating process
 
-  updateDB(donationListForNeonProcess);
+  // updateDB(donationListForNeonProcess);
 }
