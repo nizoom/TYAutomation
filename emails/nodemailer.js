@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import path from "path";
 import "nodemailer-express-handlebars";
-import nodemailerExpressHandlebars from "nodemailer-express-handlebars";
+// import nodemailerExpressHandlebars from "nodemailer-express-handlebars";
 import fs from "fs";
 import handlebars from "handlebars";
 import { rejects } from "assert";
@@ -34,12 +34,16 @@ async function createNewEmail(donation, sendResponseFromNodeMailerToClient) {
 
       //the properties of the obj are used to plug into the template
       const replacements = donation;
+      // console.log(
+      //   "🚀 ~ file: nodemailer.js:37 ~ recpientName:",
+      //   donation.recipientName
+      // );
 
       const htmlToSend = template(replacements);
 
       let mailOptions = {
         from: "cohen@commonthreadsproject.org", //
-        to: "nissimram1812@gmail.com", //['info@commonthreadsproject.org', donation.TYToEmailAddress],['cohen@commonthreadsproject.org']
+        to: ["info@commonthreadsproject.org", donation.TYToEmailAddress], //['cohen@commonthreadsproject.org']'nissimram1812@gmail.com
         bcc: ["nissimram1812@gmail.com"], //
         subject: donation.emailSubject,
         text: "",
@@ -47,13 +51,13 @@ async function createNewEmail(donation, sendResponseFromNodeMailerToClient) {
       };
 
       return new Promise((resolve, reject) => {
-        console.log({
-          user: process.env.MAIL_USERNAME,
-          pass: process.env.MAIL_PW,
-          clientId: process.env.OAUTH_CLIENTID,
-          clientSecret: process.env.OAUTH_CLIENT_SECRET,
-          refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-        });
+        // console.log({
+        //   user: process.env.MAIL_USERNAME,
+        //   pass: process.env.MAIL_PW,
+        //   clientId: process.env.OAUTH_CLIENTID,
+        //   clientSecret: process.env.OAUTH_CLIENT_SECRET,
+        //   refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+        // });
         let transporter = nodemailer.createTransport({
           service: "gmail",
           auth: {

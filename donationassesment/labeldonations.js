@@ -26,7 +26,9 @@ async function labelDonations(donoationsToBeCategorized) {
         if (donation.holidayCard) {
           donation.templateName = "ecard";
         } else {
-          donation.templateName = "honoree";
+          donation.type === "In honor of"
+            ? (donation.templateName = "honoree")
+            : (donation.templateName = "memory_honoree");
         }
         // console.log("inside label donations");
         // console.log(donation);

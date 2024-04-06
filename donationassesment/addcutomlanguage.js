@@ -3,7 +3,7 @@ async function addCustomLanguage(donations) {
 
   //here we will go through each donation and add properties that will plug into the dynamic parts of the template
 
-  //'in honor of' and 'honoree templates are the only ones with variable language and so they are trickier
+  //'in honor of' and 'honoree templates are the only ones with variable language and so they are require their own steps
 
   let donationsWithCustomLanguage = [];
 
@@ -45,41 +45,35 @@ async function addCustomLanguage(donations) {
           : inMemoryOfSentence;
 
       donation.introSentence = introSentence;
-
       donation.actionSentence = actionSentence;
-
       donationsWithCustomLanguage.push(donation);
-
       return;
     }
 
     if (donation.templateName === "honoree") {
       // is the recipient and honoree the same person?
+      if (donation.type !== "In honor of") {
+        // in memory of needs no custom language so it is ready to push now
+        donationsWithCustomLanguage.push(donation);
+        return;
+      }
 
       const honoreeSameAsRecipient =
         donation.honoreeName === donation.recipientName ? true : false;
 
       const inHonorOrInMemoryStr = honoreeSameAsRecipient
         ? "in your honor"
-        : determineThemStr(donation.type);
+        : "in honor of " + donation.honoreeName;
 
       //
-      function determineThemStr(honorOrMem) {
-        return donation.type === "In honor of"
-          ? `in honor of ${donation.honoreeName}`
-          : `in memory of ${donation.honoreeName}`;
-      }
+
       //honoree template needs honoree name, messageFromHonorer, honorerFirstName, honorerLastName
 
-      const gratefulTheyChoseToStr = determineGratefulStr();
+      const gratefulTheyChoseToStr = honoreeSameAsRecipient
+        ? "honor you"
+        : "honor them";
 
-      function determineGratefulStr() {
-        if (donation.type === "In honor of") {
-          return honoreeSameAsRecipient ? "honor you" : "honor them";
-        } else {
-          return "honor them";
-        }
-      }
+      // Edit down
 
       // const customMessageFromDonor = (donation.messageFromHonorer !== '' ) ? `They write: ${donation.messageFromHonorer}` : '' ;
 

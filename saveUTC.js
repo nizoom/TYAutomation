@@ -1,6 +1,8 @@
 import moment from "moment";
 
 function saveUTCTime(donations) {
+  // console.log("UTC LEVEL DONATIONS");
+  // console.log(donations);
   // saves UTC time to the donor obj so that the program can use that time stamp to post accurately to Neon
   const UTCdDonations = donations.map((donation) => {
     // offset for time difference
