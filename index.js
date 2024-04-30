@@ -215,12 +215,12 @@ async function automateThankYous() {
 
   // 9 or 7 potentially
 
-  // const donationListForNeonProcess = generateNeonDonationList(
-  //   todaysDonationsWithUTCTime,
-  //   donationsInfoWithTemplateLanguage
-  // );
+  const donationListForNeonProcess = generateNeonDonationList(
+    todaysDonationsWithUTCTime,
+    donationsInfoWithTemplateLanguage
+  );
 
   // 10. Begin Neon CRM updating process
 
-  // updateDB(donationListForNeonProcess);
+  updateDB(donationListForNeonProcess);
 }
