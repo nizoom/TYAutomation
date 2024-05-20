@@ -1,14 +1,9 @@
+import emailRecordsFilePath from "./pathutils.js";
 import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
-const __dirname = path.dirname(__filename); // get the name of the directory
-const filePath = path.join(__dirname, "../emails/records.json");
 
 const checkEmailRecords = async (name, timestamp) => {
   try {
-    const data = await fs.readFile(filePath, "utf-8");
+    const data = await fs.readFile(emailRecordsFilePath, "utf-8");
     const donationRecords = JSON.parse(data);
     const dontationID = generateDonationRecordID(name, timestamp);
     const result = donationRecords.find(
