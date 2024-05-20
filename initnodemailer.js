@@ -1,8 +1,24 @@
 import createNewEmail from "./emails/nodemailer.js";
+import checkEmailRecords from "./utils/checkemailrecord.js";
 
 async function initNodeMailer(donations, sendResponseFromNodeMailerToClient) {
   console.log(donations.length);
   //loop through donations and pass each obj to nodemailer
+
+  // add function to check records for already sent emails
+  const unacknowledgedDonation = [];
+  for (const donation of donations) {
+    const { firstName, lastName, timestamp } = donation;
+    const name = `${firstName} ${lastName}`;
+    const emailStatus = await checkEmailRecords(name, timestamp);
+    if (emailStatus === "SEND") {
+      unacknowledgedDonation.push(unacknowledgedDonation);
+    } else {
+      console.log(
+        `Email has already been sent or is N/A for donation: ${donation}`
+      );
+    }
+  }
 
   const mailResults = await Promise.all(
     donations.map(async (donation) => {
