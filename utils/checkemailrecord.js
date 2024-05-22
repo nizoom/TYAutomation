@@ -1,5 +1,6 @@
 import emailRecordsFilePath from "./pathutils.js";
 import fs from "fs";
+import { generateDonationRecordID } from "./recordutlls.js";
 
 const checkEmailRecords = async (name, timestamp) => {
   try {
@@ -24,10 +25,5 @@ const checkEmailRecords = async (name, timestamp) => {
 };
 
 // add timestamp to flow since it is needed as an argument
-
-const generateDonationRecordID = (name, timestamp) => {
-  const formattedName = (name) => name.replace(/ /g, "-");
-  return `${formattedName}-${timestamp}`;
-};
 
 export default checkEmailRecords;
