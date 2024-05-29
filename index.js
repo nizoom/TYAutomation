@@ -97,7 +97,6 @@ app.use(
           return true;
         }
       }
-      // app.use(haltOnTimedout);
     }
   }
 );
@@ -164,8 +163,6 @@ async function automateThankYous() {
 
   const donationInfo = await collectDonationInfo(newDonations);
 
-  console.log(donationInfo.length + " NUMBER OF DONATIONS");
-  console.log(donationInfo[14]);
   // const newdonationInfo = donationInfo.filter((_, index) => index !== 14);
 
   //4.5 filter our subsequent monthly donations after the first one. If it is the first, then it gets a unique template
@@ -222,5 +219,5 @@ async function automateThankYous() {
 
   // 10. Begin Neon CRM updating process
 
-  updateDB(donationListForNeonProcess);
+  // updateDB(donationListForNeonProcess);
 }

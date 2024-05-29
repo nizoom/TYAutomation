@@ -1,19 +1,20 @@
 import emailRecordsFilePath from "./pathutils.js";
-import fs from "fs";
+import fs from "fs/promises";
 import { generateDonationRecordID } from "./recordutlls.js";
 
-const checkEmailRecords = async (name, timestamp) => {
+const checkEmailRecords = async (firstName, lastName, timestamp) => {
   try {
     const data = await fs.readFile(emailRecordsFilePath, "utf-8");
     const donationRecords = JSON.parse(data);
-    const dontationID = generateDonationRecordID(name, timestamp);
+    const dontationID = generateDonationRecordID(
+      firstName,
+      lastName,
+      timestamp
+    );
     const result = donationRecords.find(
       (donationRecord) => donationRecord.donationID === dontationID
     );
-    const returnResult = result ? "SEND" : "DO NOT SEND";
-    // if result is undefined return action item SEND
-    // else action item is to NOT SEND
-    return returnResult;
+    return result;
   } catch (error) {
     if (error.code === "ENOENT") {
       // File does not exist
