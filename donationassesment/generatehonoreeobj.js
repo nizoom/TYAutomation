@@ -23,7 +23,7 @@ async function generateHonoreeObj(donations) {
       donationsWithHonoreesObjects.push({
         type: donation.honorStatus.dedication_type,
         honoreeName: honoreeName,
-
+        donationDate: donation.donationDate,
         //honoree email address -> changed to TYToEmailAddress so that it can be consistent with the other donation object types
         TYToEmailAddress: honoreeInfo.recipient_email,
 

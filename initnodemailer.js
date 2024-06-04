@@ -6,19 +6,20 @@ async function initNodeMailer(donations, sendResponseFromNodeMailerToClient) {
   //loop through donations and pass each obj to nodemailer
 
   // add function to check records for already sent emails
-  const unacknowledgedDonation = [];
+  const unacknowledgedDonations = [];
   for (const donation of donations) {
-    console.log("CHECK FOR TIME PROPERTY");
-    console.log(donation);
-    const { firstName, lastName, donationDate } = donation;
+    const { firstName, lastName, donationDate, honoreeName } = donation;
 
     const emailStatus = await checkEmailRecords(
       firstName,
       lastName,
-      donationDate
+      donationDate,
+      honoreeName
     );
-    if (emailStatus === false) {
-      unacknowledgedDonation.push(unacknowledgedDonation);
+
+    if (emailStatus === undefined) {
+      console.log("🚀 ~ initNodeMailer ~ emailStatus:", emailStatus);
+      unacknowledgedDonations.push(donation);
     } else {
       console.log(
         `Email has already been sent or is N/A for donation: ${donation}`
@@ -26,8 +27,10 @@ async function initNodeMailer(donations, sendResponseFromNodeMailerToClient) {
     }
   }
 
+  // turn this into an function that gets called rather than a const that gets intialized immediately
+
   const mailResults = await Promise.all(
-    unacknowledgedDonation.map(async (donation) => {
+    unacknowledgedDonations.map(async (donation) => {
       //set timeout to avoid error with too many node mailer calls back to back
 
       const index = donations.indexOf(donation);

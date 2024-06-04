@@ -23,13 +23,14 @@ const getJsonFile = async () => {
 };
 
 const addRecord = async (donation, emailStatus) => {
-  const { firstName, lastName, donationDate } = donation;
+  const { firstName, lastName, donationDate, honoreeName } = donation;
   try {
     const currentFileData = await getJsonFile();
     const recordId = generateDonationRecordID(
       firstName,
       lastName,
-      donationDate
+      donationDate,
+      honoreeName
     );
     const newRecord = new Record(recordId, emailStatus);
     const updatedFileData = [...currentFileData, newRecord];

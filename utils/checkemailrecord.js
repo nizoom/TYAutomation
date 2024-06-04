@@ -2,18 +2,26 @@ import emailRecordsFilePath from "./pathutils.js";
 import fs from "fs/promises";
 import { generateDonationRecordID } from "./recordutlls.js";
 
-const checkEmailRecords = async (firstName, lastName, timestamp) => {
+const checkEmailRecords = async (
+  firstName,
+  lastName,
+  donationDate,
+  honoreeName
+) => {
   try {
     const data = await fs.readFile(emailRecordsFilePath, "utf-8");
     const donationRecords = JSON.parse(data);
-    const dontationID = generateDonationRecordID(
+    const donationID = generateDonationRecordID(
       firstName,
       lastName,
-      timestamp
+      donationDate,
+      honoreeName
     );
+
     const result = donationRecords.find(
-      (donationRecord) => donationRecord.donationID === dontationID
+      (donationRecord) => donationRecord.id === donationID
     );
+
     return result;
   } catch (error) {
     if (error.code === "ENOENT") {
