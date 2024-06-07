@@ -1,7 +1,7 @@
 import moment from "moment";
 
 async function checkForNewDonations(donations, currentTime) {
-  const previousTime = moment(currentTime).subtract(24, "days").toDate(); // this defines the window in which a donation is considered 'new'. Previous time is 5:30 yesterday
+  const previousTime = moment(currentTime).subtract(27, "days").toDate(); // this defines the window in which a donation is considered 'new'. Previous time is 5:30 yesterday
 
   let newDonations = [];
   //if donation time is later than previous time then it is a new donation and will need an email

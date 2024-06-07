@@ -7,7 +7,7 @@ const generateDonationRecordID = (
   const formattedName =
     honoreeName === undefined
       ? formatName(`${firstName}, ${lastName}`)
-      : formatName(honoreeName);
+      : formatName(honoreeName) + "-honoree";
   const timestamp = dateString.replace(",", "").replace(/ /g, "-");
   return `${formattedName}-${timestamp}`;
 };

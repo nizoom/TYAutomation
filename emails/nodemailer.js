@@ -5,7 +5,7 @@ import "nodemailer-express-handlebars";
 // import nodemailerExpressHandlebars from "nodemailer-express-handlebars";
 import fs from "fs";
 import handlebars from "handlebars";
-import addRecord from "../utils/addemailrecord.js";
+import { addRecord } from "../utils/addemailrecord.js";
 
 async function createNewEmail(donation, sendResponseFromNodeMailerToClient) {
   console.log("inside nodemailer");
