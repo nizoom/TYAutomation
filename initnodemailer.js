@@ -16,7 +16,7 @@ async function initNodeMailer(donations, sendResponseFromNodeMailerToClient) {
       donationDate,
       honoreeName
     );
-
+    console.log(emailStatus);
     if (emailStatus === undefined) {
       console.log("🚀 ~ initNodeMailer ~ emailStatus:", emailStatus);
       unacknowledgedDonations.push(donation);
