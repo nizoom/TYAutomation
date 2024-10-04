@@ -11,6 +11,7 @@ const checkEmailRecords = async (
   try {
     const data = await fs.readFile(emailRecordsFilePath, "utf-8");
     const donationRecords = JSON.parse(data);
+    console.log("🚀 ~ donationRecords:", donationRecords);
     const donationID = generateDonationRecordID(
       firstName,
       lastName,

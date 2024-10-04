@@ -16,13 +16,16 @@ async function initNodeMailer(donations, sendResponseFromNodeMailerToClient) {
       donationDate,
       honoreeName
     );
-    console.log(emailStatus);
+    console.log("🚀 ~ initNodeMailer ~ emailStatus:", emailStatus);
+
     if (emailStatus === undefined) {
-      console.log("🚀 ~ initNodeMailer ~ emailStatus:", emailStatus);
       unacknowledgedDonations.push(donation);
     } else {
       console.log(
-        `Email has already been sent or is N/A for donation: ${donation}`
+        console.log(
+          "🚀 ~ initNodeMailer ~ emailStatus:",
+          emailStatus
+        )`Email has already been sent or is N/A for donation: ${donation}`
       );
     }
   }
