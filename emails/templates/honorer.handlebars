@@ -1,165 +1,188 @@
-<!DOCTYPE html>
-
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title> New Donor and Honorer Template</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-        <link rel = 'stylesheet' href = 'styles.css'>
-    </head>
-   
-    <body style="background-color: #D4EDF1; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 17px">
-         
-            <div style="margin: 0 20px 0 20px">
-                <header>
-                    <p style  = "margin-top: 22px;" >  Dear {{firstName}} {{dearDonorStr}},</p>
-                </header>
-             
-                     <p style = 'padding: 5px 0 5px 0;'> 
-                          {{introSentence}}
-                         
-                          {{actionSentence}}
-                          
-                         </p>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title> New Donor and Honorer Template</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-                         <p style = 'padding: 5px 0 5px 0;'> With your gift of ${{donationAmount}} on {{donationDate}}
-                             you are providing a circle of hope for survivors of sexual violence. 
-                             Because of you, women and girls who are most at risk during this time of crisis will have access 
-                             to transformative trauma healing. They can become part of our Common Threads Project circles and 
-                             build camaraderie with other women who share their experience. </p> 
-                        <section>
-                        <p style = 'padding: 5px 0 5px 0;'>
-                            We are grateful for your support of Common Threads Project and the hope you give survivors of sexual violence.  This is what you make possible:
-                        </p>
+  <body
+    style="background-color: #D4EDF1; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 17px"
+  >
 
-                        <div> 
+    <div style="margin: 0 20px 0 20px">
+      <header>
+        <p style="margin-top: 22px;"> Dear {{firstName}} {{dearDonorStr}},</p>
+      </header>
 
-                            <h3 style = 'font-size: medium;'> Ecuador </h3>
-    
-                                <img style = 'border-radius: 16px;' src = "https://i.postimg.cc/CMRsztbh/ecuador.webp" alt = 'our project in Ecudaor' width = '50%'/>
-    
-                                <em><p>  “I feel relieved when I come here. I feel that this time is for me. 
-                                    I mean I feel like I exist.”<p/> 
-                                    <p>“I am stronger, I believe in myself more.”</p>
-                                </em> 
-    
-                        </div>
-    
-    
-                        <div style = 'padding-top: 5px'> 
-                            <h3 style = 'font-size: medium;'> Nepal </h3>
-    
-                            <img style = 'border-radius: 16px;'src = 'https://i.postimg.cc/gr9JJr8Z/nepal.webp' alt = 'our project in Nepal' width = '60%'/>
-                            <em><p>  “I feel like I’ve rid myself of a heavy load, a load I carried. 
-                                It’s passed now. I am getting rid of things that I had carried in my heart.”<p/> 
-                            </em> 
-    
-                        </div>
-    
-    
-                        <div style = 'padding-top: 5px'>
+      <p style="padding: 5px 0 5px 0;">
+        {{introSentence}}
 
-                            <h3 style = 'font-size: medium;'> Democratic Republic of Congo </h3>
-    
-    
-                            <img src = 'https://i.postimg.cc/B6VbrmvN/drc.webp' style = 'border-radius: 16px;' alt = 'our project in The DRC' width = '60%'/>
-                            <em><p>  “I don’t have to feel shame for anything that happened to me. It is a  big relief for me!”<p/> 
-                            </em> 
-                        </div>
-    
-                        <div style = 'padding-top: 5px;  margin-bottom: 35px' > 
-                            <h3 style = 'font-size: medium;'> Bosnia </h3>
-                            
-                            <img style = 'border-radius: 16px;' src = 'https://i.postimg.cc/cHH6kpdr/bosnia.webp' alt = 'our project in Bosnia' width ='50%'/>
-                            <em><p>  “Sometimes I am kidding that after each session here I feel like I have wings. This means a lot for me”<p/> 
-                            </em> 
-                        </div>
-             
-                    </section>
+        {{actionSentence}}
 
-             
+      </p>
 
-                    <p style = 'padding-top: 10px' >The women and girls of Common Threads Project appreciate your belief in the possibility of healing. </p>
+      <p style="padding: 5px 0 5px 0;">
+        With your gift of ${{donationAmount}}
+        on
+        {{donationDate}}
+        you are providing a circle of hope for survivors of sexual violence.
+        Because of you, women and girls who are most at risk during this time of
+        crisis will have access to transformative trauma healing. They can
+        become part of our Common Threads Project circles and build camaraderie
+        with other women who share their experience.
+      </p>
+      <section>
+        <p style="padding: 5px 0 5px 0;">
+          We are grateful for your support of Common Threads Project and the
+          hope you give survivors of sexual violence. This is what you make
+          possible:
+        </p>
 
-                    <p style = 'font-weight: bold;'> {{taxParagraph}} </p>
-                    <div id = 'output'> 
-                    </div>
-    
-                    <footer>
-                        <ul style = 'list-style: none; margin-left: 0; padding-left: 0'>
-            
-                            <li style = 'margin: 5px'>
-                                With gratitude and best wishes,
-                            </li>
-                        
-            
-                            <li style = 'margin: 10px 0 10px 0'>
-                                <img src="https://i.postimg.cc/qRBcpBdw/rc-signature.png" alt="signature"  
-                                width = '150px' height= '50px'  > 
-                            </li>
-            
-                            <li>
-                                <section style = "display:flex; gap: 20px;">
-                                    <div>
-                                        <li style = 'margin: 5px'>
-                                            Rachel A. Cohen, Ph.D.
-                                        </li>
-                                    
-                                        <li style = 'margin: 5px'>
-                                            Founder and Executive Director
-                                        </li>
-                        
-                                        <li style = 'margin: 5px'> 
-                                            Common Threads Project
-                                        </li>
-            
-                                    </div>
-                                 
-            
-                                    <li style = ''> 
-                                        <img src = 'https://images.squarespace-cdn.com/content/v1/5b7eeaf2c258b4a04473be79/1563828132352-Y3LYHVJEF6K6ACTZTM4I/masterlogo+transparent.png'
-                                        alt = 'organization logo' width = '150px' height= '100px'
-                                        />
-                            </li>
-                                </section>
-            
-                            </li>
-                           
-                            <div style="margin-top: -30px">
-                                <li style = 'margin-left: 3px'>
-                                    <a href="www.commonthreadsproject.org" target="_blank" rel="noopener noreferrer"> www.commonthreadsproject.org</a>
-                                </li>
-                                <li>
-                                    <p>Follow us on <a href="https://www.facebook.com/CommonThreadsProject/" target="_blank" rel="noopener noreferrer"> Facebook,</a>
-                                    <a href="https://twitter.com/commonthreadspr"  target="_blank" rel="noopener noreferrer"> Twitter,</a>
-                                    <a href="https://www.instagram.com/commonthreadsproject/"  target="_blank" rel="noopener noreferrer"> Instagram</a> and
-                                    <a href="https://www.linkedin.com/company/9446569/"  target="_blank" rel="noopener noreferrer"> LinkedIn</a>
-                                    </p>
-                                </li>
-                               
-                                <li style = 'margin: 2.5px'>
-                                    ph: +1 301 928 7907
-                                </li>
-                                <li style = 'margin: 2.5px'>
-                                    25 Plaza Street West  Apt. 3F
-                                </li>
-                                <li style = 'margin: 2.5px'>
-                                    Brooklyn, N.Y. 11217
-                                </li>
-                                
-                            </div>
-                           
-                        
-                          
-                        </ul>
-            
-                    </footer>
-                </div>
-              
-        </body>
-    </html>
-    
-     
+        <div>
+
+          <h3 style="font-size: medium;"> Ecuador </h3>
+
+          <img
+            style="border-radius: 16px;"
+            src="https://i.postimg.cc/CMRsztbh/ecuador.webp"
+            alt="our project in Ecudaor"
+            width="50%"
+          />
+
+          <em><p>
+              “I feel relieved when I come here. I feel that this time is for
+              me. I mean I feel like I exist.”</p>
+            <p>“I am stronger, I believe in myself more.”</p>
+          </em>
+
+        </div>
+
+        <div style="padding-top: 5px">
+          <h3 style="font-size: medium;"> Nepal </h3>
+
+          <img
+            style="border-radius: 16px;"
+            src="https://i.postimg.cc/gr9JJr8Z/nepal.webp"
+            alt="our project in Nepal"
+            width="60%"
+          />
+          <em><p>
+              “I feel like I’ve rid myself of a heavy load, a load I carried.
+              It’s passed now. I am getting rid of things that I had carried in
+              my heart.”</p>
+          </em>
+
+        </div>
+
+        <div style="padding-top: 5px">
+
+          <h3 style="font-size: medium;"> Democratic Republic of Congo </h3>
+
+          <img
+            src="https://i.postimg.cc/B6VbrmvN/drc.webp"
+            style="border-radius: 16px;"
+            alt="our project in The DRC"
+            width="60%"
+          />
+          <em><p>
+              “I don’t have to feel shame for anything that happened to me. It
+              is a big relief for me!”</p>
+          </em>
+        </div>
+
+        <div style="padding-top: 5px;  margin-bottom: 35px">
+          <h3 style="font-size: medium;"> Bosnia </h3>
+
+          <img
+            style="border-radius: 16px;"
+            src="https://i.postimg.cc/cHH6kpdr/bosnia.webp"
+            alt="our project in Bosnia"
+            width="50%"
+          />
+          <em><p>
+              “Sometimes I am kidding that after each session here I feel like I
+              have wings. This means a lot for me”</p>
+          </em>
+        </div>
+
+      </section>
+
+      <p style="padding-top: 10px">The women and girls of Common Threads Project
+        appreciate your belief in the possibility of healing.
+      </p>
+
+      <p style="font-weight: bold;"> {{taxParagraph}} </p>
+      <div id="output">
+      </div>
+      <footer>
+        <ul style="list-style: none; margin-left: 0; padding-left: 0">
+          <li style="margin: 5px">With gratitude and best wishes,</li>
+          <li style="margin: 10px 0">
+            <img
+              src="https://iili.io/dbhHP0G.png"
+              alt="signature"
+              width="150px"
+              height="50px"
+            />
+          </li>
+
+          <section style="display:flex; gap: 20px;">
+            <div>
+              <li style="margin: 5px">Vesna Golic.</li>
+              <li style="margin: 5px">Executive Director</li>
+              <li style="margin: 5px">Common Threads Project</li>
+            </div>
+            <li>
+              <img
+                src="https://images.squarespace-cdn.com/content/v1/5b7eeaf2c258b4a04473be79/1563828132352-Y3LYHVJEF6K6ACTZTM4I/masterlogo+transparent.png"
+                alt="organization logo"
+                width="150px"
+                height="100px"
+                style="padding-left: 50px"
+              />
+            </li>
+          </section>
+
+          <div style="margin-top: -30px">
+            <li style="margin-left: 3px"><a
+                href="www.commonthreadsproject.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >www.commonthreadsproject.org</a></li>
+            <li>
+              <p>Follow us on
+                <a
+                  href="https://www.facebook.com/CommonThreadsProject/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Facebook</a>,
+                <a
+                  href="https://twitter.com/commonthreadspr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Twitter</a>,
+                <a
+                  href="https://www.instagram.com/commonthreadsproject/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Instagram</a>, and
+                <a
+                  href="https://www.linkedin.com/company/9446569/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >LinkedIn</a></p>
+            </li>
+            <li>ph: +1 301 928 7907</li>
+            <li>25 Plaza Street West Apt. 3F</li>
+            <li>Brooklyn, N.Y. 11217</li>
+          </div>
+        </ul>
+      </footer>
+    </div>
+
+  </body>
+</html>
